@@ -1,7 +1,9 @@
-import { Header } from "@components/Header";
+import { Wrapper } from "@components/Wrapper";
 
 export function App() {
   return (
-    <Header routes={[["Sobre Nós", "#"], ["Cursos", "#"], ["Parceiros", "#"], ["Transparência", "#"], ["Contato", "#"]]}/>
+    <Wrapper routes={[["Sobre Nós", "#"], ["Cursos", "#"], ["Parceiros", "#"], ["Transparência", "#"], ["Contato", "#"]]}>
+      Content
+    </Wrapper>
   );
 }

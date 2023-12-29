@@ -1,6 +1,6 @@
 import LogoColour from '@assets/logo-colour.svg';
 
-export function Header({ routes, children }) {
+export function Wrapper({ routes, children }) {
   return (
     <div className="drawer drawer-end">
       <input id="navbar-drawer" type="checkbox" className="drawer-toggle"/>
@@ -25,6 +25,9 @@ export function Header({ routes, children }) {
         <main>
           { children }
         </main>
+        <footer>
+          Footer
+        </footer>
       </div>
       <div className="drawer-side">
         <label htmlFor="navbar-drawer" aria-label="Fechar barra lateral" className="drawer-overlay"></label> 
