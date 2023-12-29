@@ -1,8 +1,7 @@
-export default function App() {
+import { Header } from "@components/Header";
+
+export function App() {
   return (
-    <p>
-      Hello, World
-    </p>
+    <Header routes={[["Sobre Nós", "#"], ["Cursos", "#"], ["Parceiros", "#"], ["Transparência", "#"], ["Contato", "#"]]}/>
   );
 }
-
