@@ -2,19 +2,18 @@ import LogoColour from '@assets/logo-colour.svg';
 import LaisLogo from '@assets/lais-logo.svg';
 import UfrnLogo from '@assets/ufrn-logo.svg';
 import { Search, Menu, X, Facebook, Twitter, Instagram } from 'lucide-react';
+import { NavLink } from 'react-router-dom';
 
-export function Wrapper({ routes, children }) {
+function Wrapper({ routes, children }) {
   return (
     <div className="drawer drawer-end min-h-screen">
       <input id="navbar-drawer" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content flex flex-col">
         <nav className="flex justify-center shadow">
           <header className="navbar p-4 xl:w-[1280px] gap-2">
-            <a href="/">
-              <img src={LogoColour} className="sm:h-8 h-6" alt="AVASUS" />
-            </a>
+            <img src={LogoColour} className="sm:h-8 h-6" alt="AVASUS" />
             <div className="hidden lg:flex">
-              {routes.map(e => <a className="btn btn-sm btn-ghost" href={e[1]}>{e[0]}</a>)}
+              {routes.map(({ path, title }) => <NavLink className="btn btn-sm btn-ghost" to={path}>{title}</NavLink>)}
             </div>
             <div className="flex-1 justify-end">
               <label htmlFor="query" className="relative">
@@ -57,7 +56,7 @@ export function Wrapper({ routes, children }) {
             </aside>
             <nav>
               <header className="text-lg footer-title opacity-100">Links úteis</header>
-              {routes.map(e => <a className="link link-hover opacity-60" href={e[1]}>{e[0]}</a>)}
+              {routes.map(({ path, title }) => <NavLink className="link link-hover opacity-60" href={path}>{title}</NavLink>)}
             </nav>
             <nav>
               <header className="text-lg footer-title opacity-100">Redes Sociais</header>
@@ -88,10 +87,12 @@ export function Wrapper({ routes, children }) {
             <img src={LogoColour} className="h-6 sm:hidden" alt="AVASUS" />
           </header>
           <ul className="menu items-center sm:items-end">
-            {routes.map(e => <li><a href={e[1]}>{e[0]}</a></li>)}
+            {routes.map(({ path, title }) => <li><NavLink to={path}>{title}</NavLink></li>)}
           </ul>
         </nav>
       </div>
     </div>
   );
 }
+
+export default Wrapper;
