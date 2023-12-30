@@ -43,16 +43,16 @@ export function Wrapper({ routes, children }) {
           {children}
         </main>
         <footer className="flex flex-col w-full text-white">
-          <div className="bg-primary flex flex-col gap-8 p-8">
+          <div className="bg-primary flex flex-col gap-4 sm:gap-8 p-8">
             <p className="text-center">Realização</p>
-            <div className="flex gap-24 justify-center">
-              <img src={LaisLogo} alt="Logo da LAIS" />
-              <img src={UfrnLogo} alt="Logo da UFRN" />
+            <div className="flex flex-col sm:flex-row gap-8 sm:gap-24 justify-center">
+              <img src={LaisLogo} alt="Logo da LAIS" className="h-12 sm:h-auto" />
+              <img src={UfrnLogo} alt="Logo da UFRN" className="h-12 sm:h-auto" />
             </div>
           </div>
           <div className="footer bg-[#323237] p-6 justify-evenly">
             <aside>
-              <img src={LaisLogo} alt="Logo da LAIS" className="h-12" />
+              <img src={LaisLogo} alt="Logo da LAIS" className="h-8 sm:h-12" />
               <p className="opacity-60">Laboratório de Inovação <br /> Tecnológica em Saúde.</p>
             </aside>
             <nav>
