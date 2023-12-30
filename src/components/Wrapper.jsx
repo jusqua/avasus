@@ -13,7 +13,7 @@ function Wrapper({ routes, children }) {
           <header className="navbar p-4 xl:w-[1280px] gap-2">
             <img src={LogoColour} className="sm:h-8 h-6" alt="AVASUS" />
             <div className="hidden lg:flex">
-              {routes.map(({ path, title }) => <NavLink className="btn btn-sm btn-ghost" to={path}>{title}</NavLink>)}
+              {routes.map(({ path, title }) => <NavLink key={`navbar-[${title}]`} className="btn btn-sm btn-ghost" to={path}>{title}</NavLink>)}
             </div>
             <div className="flex-1 justify-end">
               <label htmlFor="query" className="relative">
@@ -56,7 +56,7 @@ function Wrapper({ routes, children }) {
             </aside>
             <nav>
               <header className="text-lg footer-title opacity-100">Links úteis</header>
-              {routes.map(({ path, title }) => <NavLink className="link link-hover opacity-60" href={path}>{title}</NavLink>)}
+              {routes.map(({ path, title }) => <NavLink key={`footer-[${title}]`} className="link link-hover opacity-60" href={path}>{title}</NavLink>)}
             </nav>
             <nav>
               <header className="text-lg footer-title opacity-100">Redes Sociais</header>
@@ -87,7 +87,7 @@ function Wrapper({ routes, children }) {
             <img src={LogoColour} className="h-6 sm:hidden" alt="AVASUS" />
           </header>
           <ul className="menu items-center sm:items-end">
-            {routes.map(({ path, title }) => <li><NavLink to={path}>{title}</NavLink></li>)}
+            {routes.map(({ path, title }) => <li><NavLink key={`sidebar-[${title}]`} to={path}>{title}</NavLink></li>)}
           </ul>
         </nav>
       </div>
