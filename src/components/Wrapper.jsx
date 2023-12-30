@@ -5,10 +5,10 @@ import { Search, Menu, X, Facebook, Twitter, Instagram } from 'lucide-react';
 
 export function Wrapper({ routes, children }) {
   return (
-    <div className="drawer drawer-end">
+    <div className="drawer drawer-end min-h-screen">
       <input id="navbar-drawer" type="checkbox" className="drawer-toggle" />
-      <div className="drawer-content">
-        <nav className="drawer-content flex justify-center shadow">
+      <div className="drawer-content flex flex-col">
+        <nav className="flex justify-center shadow">
           <header className="navbar p-4 xl:w-[1280px] gap-2">
             <a href="/">
               <img src={LogoColour} className="sm:h-8 h-6" alt="AVASUS" />
