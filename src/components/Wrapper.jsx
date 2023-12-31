@@ -3,6 +3,7 @@ import LaisLogo from '@assets/lais-logo.svg';
 import UfrnLogo from '@assets/ufrn-logo.svg';
 import { Search, Menu, X, Facebook, Twitter, Instagram } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
+import { useEffect } from 'react';
 
 function Wrapper({ routes, children }) {
   return (
@@ -12,8 +13,10 @@ function Wrapper({ routes, children }) {
         <nav className="flex justify-center shadow">
           <header className="navbar p-4 xl:w-[1280px] gap-2">
             <img src={LogoColour} className="sm:h-8 h-6" alt="AVASUS" />
-            <div className="hidden lg:flex">
-              {routes.map(({ path, title }) => <NavLink key={`navbar-[${title}]`} className="btn btn-sm btn-ghost" to={path}>{title}</NavLink>)}
+            <div className="flex-none hidden lg:block">
+              <ul className="menu menu-horizontal">
+                {routes.map(({ path, title }) => <li><NavLink key={`navbar-[${title}]`} className="btn btn-sm btn-ghost" to={path}>{title}</NavLink></li>)}
+              </ul>
             </div>
             <div className="flex-1 justify-end">
               <label htmlFor="query" className="relative">
@@ -56,18 +59,18 @@ function Wrapper({ routes, children }) {
             </aside>
             <nav>
               <header className="text-lg footer-title opacity-100">Links úteis</header>
-              {routes.map(({ path, title }) => <NavLink key={`footer-[${title}]`} className="link link-hover opacity-60" href={path}>{title}</NavLink>)}
+              {routes.map(({ path, title }) => <NavLink key={`footer-[${title}]`} className="link link-hover opacity-60" to={path}>{title}</NavLink>)}
             </nav>
             <nav>
               <header className="text-lg footer-title opacity-100">Redes Sociais</header>
               <div className="flex gap-8">
-                <a className="link">
+                <a href="#" className="link">
                   <Facebook strokeWidth={.5} className="stroke-white fill-white" />
                 </a>
-                <a className="link">
+                <a href="#" className="link">
                   <Twitter strokeWidth={.5} className="stroke-white fill-white" />
                 </a>
-                <a className="link">
+                <a href="#" className="link">
                   <Instagram strokeWidth={2} className="stroke-white" />
                 </a>
               </div>
@@ -78,15 +81,16 @@ function Wrapper({ routes, children }) {
           </p>
         </footer>
       </div >
-      <div className="drawer-side">
-        <nav className="p-4 w-full sm:w-72 min-h-full bg-base-200">
+      <div className="drawer-side lg:hidden">
+        <label htmlFor="navbar-drawer" aria-label="Fecha barra lateral" className="drawer-overlay"></label>
+        <nav className="p-4 w-full sm:w-96 min-h-full bg-base-200">
           <header className="flex flex-row-reverse items-center justify-between">
             <label htmlFor="navbar-drawer" aria-label="Fechar barra lateral" className="btn btn-square btn-ghost self-end">
               <X className="stroke-neutral" />
             </label>
             <img src={LogoColour} className="h-6 sm:hidden" alt="AVASUS" />
           </header>
-          <ul className="menu items-center sm:items-end">
+          <ul className="menu">
             {routes.map(({ path, title }) => <li><NavLink key={`sidebar-[${title}]`} to={path}>{title}</NavLink></li>)}
           </ul>
         </nav>
