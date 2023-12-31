@@ -1,6 +1,6 @@
 pages:
   stage: deploy
-  image: node:20.10.0
+  image: node:lts
   before_script:
     - corepack enable
     - corepack prepare pnpm@latest-8 --activate
@@ -8,6 +8,7 @@ pages:
   script:
     - pnpm install
     - pnpm run build
+    - mv dist public
   cache:
     key:
       files:
@@ -16,6 +17,6 @@ pages:
       - .pnpm-store
   artifacts:
     paths:
-      - dist
+      - public
   only:
     - main
