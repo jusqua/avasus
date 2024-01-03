@@ -1,7 +1,5 @@
 function Partners() {
-  return (
-    <div>Parceiros</div>
-  );
+  return <div>Parceiros</div>;
 }
 
 export default Partners;

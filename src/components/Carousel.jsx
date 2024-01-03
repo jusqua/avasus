@@ -3,11 +3,15 @@ import { useEffect } from 'react';
 
 function Carousel({ slideshow }) {
   function handleSlideshowButton(index) {
-    return () => document.getElementById('carousel').scrollTo(window.innerWidth * index, 0);
-  };
+    return () =>
+      document
+        .getElementById('carousel')
+        .scrollTo(window.innerWidth * index, 0);
+  }
 
   function handleSlideshowArrow(side) {
-    return () => document.getElementById('carousel').scrollBy(window.innerWidth * side, 0);
+    return () =>
+      document.getElementById('carousel').scrollBy(window.innerWidth * side, 0);
   }
 
   useEffect(() => {
@@ -16,14 +20,20 @@ function Carousel({ slideshow }) {
 
     carousel.addEventListener('scroll', () => {
       if (carousel.scrollLeft % window.innerWidth == 0)
-        document.getElementById(`radio-slide-${carousel.scrollLeft / window.innerWidth}`).checked = true;
+        document.getElementById(
+          `radio-slide-${carousel.scrollLeft / window.innerWidth}`,
+        ).checked = true;
     });
   }, []);
 
   return (
     <div className="relative">
       <div id="carousel" className="carousel w-full">
-        {slideshow.map((e, i) => <div key={`slide-${i}`} className="carousel-item w-full"><img src={e} /></div>)}
+        {slideshow.map((e, i) => (
+          <div key={`slide-${i}`} className="carousel-item w-full">
+            <img src={e} />
+          </div>
+        ))}
       </div>
       <div className="absolute flex gap-2 bottom-[10%] right-1/2 transform translate-x-1/2">
         {slideshow.map((_, i) => (

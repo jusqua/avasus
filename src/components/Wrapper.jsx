@@ -3,7 +3,6 @@ import LaisLogo from '@assets/lais-logo.svg';
 import UfrnLogo from '@assets/ufrn-logo.svg';
 import { Search, Menu, X, Facebook, Twitter, Instagram } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
-import { useEffect } from 'react';
 
 function Wrapper({ routes, children }) {
   return (
@@ -15,7 +14,17 @@ function Wrapper({ routes, children }) {
             <img src={LogoColour} className="sm:h-8 h-6" alt="AVASUS" />
             <div className="flex-none hidden lg:block">
               <ul className="menu menu-horizontal">
-                {routes.map(({ path, title }) => <li><NavLink key={`navbar-[${title}]`} className="btn btn-sm btn-ghost" to={path}>{title}</NavLink></li>)}
+                {routes.map(({ path, title }) => (
+                  <li>
+                    <NavLink
+                      key={`navbar-[${title}]`}
+                      className="btn btn-sm btn-ghost"
+                      to={path}
+                    >
+                      {title}
+                    </NavLink>
+                  </li>
+                ))}
               </ul>
             </div>
             <div className="flex-1 justify-end">
@@ -31,44 +40,81 @@ function Wrapper({ routes, children }) {
               </label>
             </div>
             <div className="flex-none hidden gap-2 lg:flex">
-              <a className="btn btn-sm btn-outline border-neutral hover:bg-neutral hover:border-neutral rounded-full px-6" href="#">Entrar</a>
-              <a className="btn btn-sm btn-neutral rounded-full px-6" href="#">Cadastrar</a>
+              <a
+                className="btn btn-sm btn-outline border-neutral hover:bg-neutral hover:border-neutral rounded-full px-6"
+                href="#"
+              >
+                Entrar
+              </a>
+              <a className="btn btn-sm btn-neutral rounded-full px-6" href="#">
+                Cadastrar
+              </a>
             </div>
             <div className="flex justify-end lg:hidden">
-              <label htmlFor="navbar-drawer" aria-label="Abrir menu lateral" className="btn btn-square btn-ghost">
+              <label
+                htmlFor="navbar-drawer"
+                aria-label="Abrir menu lateral"
+                className="btn btn-square btn-ghost"
+              >
                 <Menu className="stroke-neutral" />
               </label>
             </div>
           </header>
         </nav>
-        <main className="flex-1">
-          {children}
-        </main>
+        <main className="flex-1">{children}</main>
         <footer className="flex flex-col w-full text-white">
           <div className="bg-primary flex flex-col gap-4 sm:gap-8 p-8">
             <p className="text-center">Realização</p>
             <div className="flex flex-col sm:flex-row gap-8 sm:gap-24 justify-center">
-              <img src={LaisLogo} alt="Logo da LAIS" className="h-12 sm:h-auto" />
-              <img src={UfrnLogo} alt="Logo da UFRN" className="h-12 sm:h-auto" />
+              <img
+                src={LaisLogo}
+                alt="Logo da LAIS"
+                className="h-12 sm:h-auto"
+              />
+              <img
+                src={UfrnLogo}
+                alt="Logo da UFRN"
+                className="h-12 sm:h-auto"
+              />
             </div>
           </div>
           <div className="footer bg-[#323237] p-6 justify-evenly">
             <aside>
               <img src={LaisLogo} alt="Logo da LAIS" className="h-8 sm:h-12" />
-              <p className="opacity-60">Laboratório de Inovação <br /> Tecnológica em Saúde.</p>
+              <p className="opacity-60">
+                Laboratório de Inovação <br /> Tecnológica em Saúde.
+              </p>
             </aside>
             <nav>
-              <header className="text-lg footer-title opacity-100">Links úteis</header>
-              {routes.map(({ path, title }) => <NavLink key={`footer-[${title}]`} className="link link-hover opacity-60" to={path}>{title}</NavLink>)}
+              <header className="text-lg footer-title opacity-100">
+                Links úteis
+              </header>
+              {routes.map(({ path, title }) => (
+                <NavLink
+                  key={`footer-[${title}]`}
+                  className="link link-hover opacity-60"
+                  to={path}
+                >
+                  {title}
+                </NavLink>
+              ))}
             </nav>
             <nav>
-              <header className="text-lg footer-title opacity-100">Redes Sociais</header>
+              <header className="text-lg footer-title opacity-100">
+                Redes Sociais
+              </header>
               <div className="flex gap-8">
                 <a href="#" className="link">
-                  <Facebook strokeWidth={.5} className="stroke-white fill-white" />
+                  <Facebook
+                    strokeWidth={0.5}
+                    className="stroke-white fill-white"
+                  />
                 </a>
                 <a href="#" className="link">
-                  <Twitter strokeWidth={.5} className="stroke-white fill-white" />
+                  <Twitter
+                    strokeWidth={0.5}
+                    className="stroke-white fill-white"
+                  />
                 </a>
                 <a href="#" className="link">
                   <Instagram strokeWidth={2} className="stroke-white" />
@@ -77,21 +123,36 @@ function Wrapper({ routes, children }) {
             </nav>
           </div>
           <p className="bg-[#424146] text-white text-center p-4">
-            {new Date().getFullYear()} © LAIS (HUOL). Todos os direitos reservados
+            {new Date().getFullYear()} © LAIS (HUOL). Todos os direitos
+            reservados
           </p>
         </footer>
-      </div >
+      </div>
       <div className="drawer-side lg:hidden">
-        <label htmlFor="navbar-drawer" aria-label="Fecha barra lateral" className="drawer-overlay"></label>
+        <label
+          htmlFor="navbar-drawer"
+          aria-label="Fecha barra lateral"
+          className="drawer-overlay"
+        ></label>
         <nav className="p-4 w-full sm:w-96 min-h-full bg-base-200">
           <header className="flex flex-row-reverse items-center justify-between">
-            <label htmlFor="navbar-drawer" aria-label="Fechar barra lateral" className="btn btn-square btn-ghost self-end">
+            <label
+              htmlFor="navbar-drawer"
+              aria-label="Fechar barra lateral"
+              className="btn btn-square btn-ghost self-end"
+            >
               <X className="stroke-neutral" />
             </label>
             <img src={LogoColour} className="h-6 sm:hidden" alt="AVASUS" />
           </header>
           <ul className="menu">
-            {routes.map(({ path, title }) => <li><NavLink key={`sidebar-[${title}]`} to={path}>{title}</NavLink></li>)}
+            {routes.map(({ path, title }) => (
+              <li>
+                <NavLink key={`sidebar-[${title}]`} to={path}>
+                  {title}
+                </NavLink>
+              </li>
+            ))}
           </ul>
         </nav>
       </div>

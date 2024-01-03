@@ -1,7 +1,5 @@
 function Transparency() {
-  return (
-    <div>Transparência</div>
-  );
+  return <div>Transparência</div>;
 }
 
 export default Transparency;
