@@ -37,9 +37,15 @@ function getPaginationList(index, length) {
   return [...after.reverse(), ...before];
 }
 
-function Pagination({ index, setIndex, length, multiplier, limit, children }) {
-  if (length < 1) return null;
-
+function Pagination({
+  index,
+  setIndex,
+  length,
+  multiplier,
+  limit,
+  loaded = true,
+  children,
+}) {
   function PaginationItem() {
     return (
       <div className="join my-2">
@@ -101,14 +107,20 @@ function Pagination({ index, setIndex, length, multiplier, limit, children }) {
   return (
     <div className="flex flex-col">
       <p className="text-gray-500 italic font-normal">
-        {Math.min((index + 1) * multiplier, limit)} de {limit} resultados
+        {!loaded ? (
+          <div className="skeleton h-6 w-48"></div>
+        ) : (
+          `${Math.min((index + 1) * multiplier, limit)} de ${limit} resultados`
+        )}
       </p>
       <div className="self-center md:hidden">
-        <PaginationItem />
+        {loaded ? null : <div className="skeleton h-8 w-70"></div>}
+        {!loaded || length < 1 ? null : <PaginationItem />}
       </div>
       <div className="flex-grow-1">{children}</div>
       <div className="self-center">
-        <PaginationItem />
+        {loaded ? null : <div className="skeleton h-8 w-70"></div>}
+        {!loaded || length < 1 ? null : <PaginationItem />}
       </div>
     </div>
   );

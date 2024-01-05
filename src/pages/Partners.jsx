@@ -7,6 +7,7 @@ import Pagination from '@components/Pagination';
 function Partners() {
   const [partners, setPartners] = useState([]);
 
+  const [loaded, setLoaded] = useState(false);
   const [limit, setLimit] = useState(0);
   const [index, setIndex] = useState(0);
   const [length, setLength] = useState(0);
@@ -17,11 +18,14 @@ function Partners() {
       .get(`/parceiros?_start=${index}&_limit=${multiplier}`)
       .then((response) => {
         setPartners(response.data);
-        setLimit(response.headers['x-total-count']);
-        setLength(Math.round(response.headers['x-total-count'] / multiplier));
+        if (!loaded) {
+          setLimit(response.headers['x-total-count']);
+          setLength(Math.round(response.headers['x-total-count'] / multiplier));
+          setLoaded(true);
+        }
       });
     return () => { };
-  }, [index, length, multiplier, limit]);
+  }, [index, length, multiplier, limit, loaded]);
 
   return (
     <Body>
@@ -32,9 +36,10 @@ function Partners() {
         length={length}
         multiplier={multiplier}
         limit={limit}
+        loaded={loaded}
       >
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 grid-flow-row-dense gap-8 py-4">
-          {partners.length === 0
+          {!loaded
             ? [...Array(6).keys()].map((e) => (
               <div className="flex flex-col gap-1" key={e}>
                 <div className="skeleton h-48"></div>
