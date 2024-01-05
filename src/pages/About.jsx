@@ -1,7 +1,5 @@
-import Body from '@components/Body';
-
 function About() {
-  return <Body>Sobre</Body>;
+  return <>Sobre</>;
 }
 
 export default About;

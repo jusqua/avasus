@@ -29,7 +29,7 @@ function Partners() {
   }, [index, length, multiplier, limit, loaded]);
 
   return (
-    <Body>
+    <>
       <Breadcrumbs />
       <h1 className="text-2xl text-primary my-4">Nosso Parceiros</h1>
       <Pagination
@@ -60,7 +60,7 @@ function Partners() {
             ))}
         </div>
       </Pagination>
-    </Body>
+    </>
   );
 }
 

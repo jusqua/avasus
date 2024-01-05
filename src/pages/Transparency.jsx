@@ -1,7 +1,5 @@
-import Body from '@components/Body';
-
 function Transparency() {
-  return <Body>Transparência</Body>;
+  return <>Transparência</>;
 }
 
 export default Transparency;

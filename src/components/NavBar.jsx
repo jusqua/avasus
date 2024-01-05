@@ -14,7 +14,7 @@ function NavBar({ children }) {
             <img src={LogoColour} className="sm:h-8 h-6" alt="AVASUS" />
             <div className="flex-none hidden lg:block">
               <ul className="menu menu-horizontal">
-                {routes.map(({ path, title }, i) => (
+                {routes[0].children.map(({ path, title }, i) => (
                   <li key={i}>
                     <NavLink className="btn btn-sm btn-ghost" to={path}>
                       {title}

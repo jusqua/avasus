@@ -1,8 +1,8 @@
-import LaisLogo from '@assets/lais-logo.svg';
-import UfrnLogo from '@assets/ufrn-logo.svg';
 import { Facebook, Twitter, Instagram } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
 
+import LaisLogo from '@assets/lais-logo.svg';
+import UfrnLogo from '@assets/ufrn-logo.svg';
 import routes from '@utils/routes';
 
 function Footer() {
@@ -26,12 +26,8 @@ function Footer() {
           <header className="text-lg footer-title opacity-100">
             Links úteis
           </header>
-          {routes.map(({ path, title }) => (
-            <NavLink
-              key={`footer-[${title}]`}
-              className="link link-hover opacity-60"
-              to={path}
-            >
+          {routes[0].children.map(({ path, title }, i) => (
+            <NavLink key={i} className="link link-hover opacity-60" to={path}>
               {title}
             </NavLink>
           ))}
