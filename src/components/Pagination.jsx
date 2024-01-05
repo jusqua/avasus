@@ -40,13 +40,9 @@ function getPaginationList(index, length) {
 function Pagination({ index, setIndex, length, multiplier, limit, children }) {
   if (length < 1) return null;
 
-  return (
-    <div className="flex flex-col">
-      <p className="text-gray-500 italic font-normal">
-        {Math.min((index + 1) * multiplier, limit)} de {limit} resultados
-      </p>
-      {children}
-      <div className="join self-center my-2">
+  function PaginationItem() {
+    return (
+      <div className="join my-2">
         <button
           className="join-item btn btn-sm btn-square"
           disabled={index === 0}
@@ -57,7 +53,6 @@ function Pagination({ index, setIndex, length, multiplier, limit, children }) {
         <input
           className="join-item btn btn-sm btn-square"
           type="radio"
-          name="pagination"
           value={0}
           aria-label={1}
           onChange={() => setIndex(0)}
@@ -73,7 +68,6 @@ function Pagination({ index, setIndex, length, multiplier, limit, children }) {
             key={e}
             className="join-item btn btn-sm btn-square"
             type="radio"
-            name="pagination"
             value={e}
             aria-label={e + 1}
             onChange={() => setIndex(e)}
@@ -88,7 +82,6 @@ function Pagination({ index, setIndex, length, multiplier, limit, children }) {
         <input
           className="join-item btn btn-sm btn-square"
           type="radio"
-          name="pagination"
           value={length - 1}
           aria-label={length}
           onChange={() => setIndex(length - 1)}
@@ -101,6 +94,21 @@ function Pagination({ index, setIndex, length, multiplier, limit, children }) {
         >
           <ChevronRight size="16" />
         </button>
+      </div>
+    );
+  }
+
+  return (
+    <div className="flex flex-col">
+      <p className="text-gray-500 italic font-normal">
+        {Math.min((index + 1) * multiplier, limit)} de {limit} resultados
+      </p>
+      <div className="self-center md:hidden">
+        <PaginationItem />
+      </div>
+      <div className="flex-grow-1">{children}</div>
+      <div className="self-center">
+        <PaginationItem />
       </div>
     </div>
   );
