@@ -40,7 +40,7 @@ function Partners() {
       >
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 grid-flow-row-dense gap-8 py-4">
           {!loaded
-            ? [...Array(6).keys()].map((e) => (
+            ? [...Array(multiplier).keys()].map((e) => (
               <div className="flex flex-col gap-1" key={e}>
                 <div className="skeleton h-48"></div>
                 <p className="skeleton py-2"></p>
@@ -49,9 +49,9 @@ function Partners() {
             : partners.map(({ id, capa, titulo }) => (
               <div key={id}>
                 <div className="flex justify-center h-48">
-                  <img className="self-center" src={capa} />
+                  <img className="object-contain" src={capa} />
                 </div>
-                <p className="py-2 text-center border-t border-primary">
+                <p className="py-2 text-center border-t border-primary h-24">
                   {titulo}
                 </p>
               </div>
