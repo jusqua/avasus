@@ -47,13 +47,7 @@ function Partners() {
   // useEffect(getPartners, []);
 
   return (
-    <div className="w-full lg:w-[1024px] p-4 flex flex-col">
-      <div className="max-w-xs text-sm breadcrumbs my-2">
-        <ul>
-          <li>Início</li>
-          <li>Parceiros</li>
-        </ul>
-      </div>
+    <>
       <h1 className="text-2xl text-primary my-4">Nosso Parceiros</h1>
       <p className="text-gray-500 italic font-normal">
         {Math.min((start + 1) * multiplier, partnersLimit)} de {partnersLimit}{' '}
@@ -139,7 +133,7 @@ function Partners() {
           </button>
         </div>
       )}
-    </div>
+    </>
   );
 }
 

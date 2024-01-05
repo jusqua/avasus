@@ -3,6 +3,7 @@ import LaisLogo from '@assets/lais-logo.svg';
 import UfrnLogo from '@assets/ufrn-logo.svg';
 import { Search, Menu, X, Facebook, Twitter, Instagram } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
+import Breadcrumbs from '@components/Breadcrumbs';
 
 function Wrapper({ routes, children }) {
   return (
@@ -61,7 +62,12 @@ function Wrapper({ routes, children }) {
             </div>
           </header>
         </nav>
-        <main className="flex flex-1 justify-center">{children}</main>
+        <div className="flex flex-1 justify-center">
+          <main className="w-full lg:w-[1024px] p-4 flex flex-col">
+            <Breadcrumbs />
+            {children}
+          </main>
+        </div>
         <footer className="flex flex-col w-full text-white">
           <div className="bg-primary flex flex-col gap-4 sm:gap-8 p-8">
             <p className="text-center">Realização</p>
