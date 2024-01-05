@@ -1,7 +1,7 @@
-import LogoColour from '@assets/logo-colour.svg';
 import { Search, Menu, X } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
 
+import LogoColour from '@assets/logo-colour.svg';
 import routes from '@utils/routes';
 
 function NavBar({ children }) {
@@ -9,7 +9,7 @@ function NavBar({ children }) {
     <div className="drawer drawer-end min-h-screen">
       <input id="navbar-drawer" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content flex flex-col">
-        <nav className="flex justify-center shadow">
+        <nav className="flex justify-center shadow sticky top-0 z-10 bg-base-100">
           <header className="navbar p-4 xl:w-[1280px] gap-2">
             <img src={LogoColour} className="sm:h-8 h-6" alt="AVASUS" />
             <div className="flex-none hidden lg:block">
@@ -29,7 +29,7 @@ function NavBar({ children }) {
                 <input
                   id="query"
                   name="query"
-                  className="input input-bordered input-neutral input-sm w-full rounded-full pl-10"
+                  className="input input-bordered input-neutral input-sm w-full rounded-full pl-10 bg-opacity-40"
                   type="text"
                   placeholder="Buscar"
                 />
@@ -59,7 +59,7 @@ function NavBar({ children }) {
         </nav>
         {children}
       </div>
-      <div className="drawer-side lg:hidden">
+      <div className="drawer-side z-20 lg:hidden">
         <label
           htmlFor="navbar-drawer"
           aria-label="Fecha barra lateral"
@@ -79,7 +79,14 @@ function NavBar({ children }) {
           <ul className="menu">
             {routes[0].children.map(({ path, title }, i) => (
               <li key={i}>
-                <NavLink to={path}>{title}</NavLink>
+                <NavLink
+                  to={path}
+                  onClick={() => {
+                    document.getElementById('navbar-drawer').checked = false;
+                  }}
+                >
+                  {title}
+                </NavLink>
               </li>
             ))}
           </ul>
