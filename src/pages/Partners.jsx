@@ -31,7 +31,7 @@ function Partners() {
   return (
     <>
       <Breadcrumbs />
-      <h1 className="text-2xl text-primary my-4">Nosso Parceiros</h1>
+      <h1 className="text-4xl text-primary my-4">Nossos Parceiros</h1>
       <Pagination
         index={index}
         setIndex={setIndex}
