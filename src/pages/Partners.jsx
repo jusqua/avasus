@@ -59,7 +59,7 @@ function Partners() {
         {Math.min((start + 1) * multiplier, partnersLimit)} de {partnersLimit}{' '}
         resultados
       </p>
-      <div className="grid grid-rows-6 sm:grid-rows-3 lg:grid-rows-2 grid-flow-col gap-8 py-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 grid-flow-row-dense gap-8 py-4">
         {partners.length === 0
           ? [...Array(6).keys()].map((e) => (
             <div className="flex flex-col gap-1" key={e}>
