@@ -61,7 +61,7 @@ function Wrapper({ routes, children }) {
             </div>
           </header>
         </nav>
-        <main className="flex-1">{children}</main>
+        <main className="flex flex-1 justify-center">{children}</main>
         <footer className="flex flex-col w-full text-white">
           <div className="bg-primary flex flex-col gap-4 sm:gap-8 p-8">
             <p className="text-center">Realização</p>

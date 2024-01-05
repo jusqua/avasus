@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;1,400;1,600&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -6,4 +6,25 @@
 :root {
   font-family: 'Montserrat', Arial, Helvetica, sans-serif;
   font-weight: 600;
+}
+
+.breadcrumbs>ul>li+ ::before,
+.breadcrumbs>ul>ol+ ::before {
+  --tw-rotate: 25deg;
+  margin-right: 0.5rem;
+  margin-left: 0.5rem;
+  height: 1rem;
+  width: 0.2rem;
+  border-top: 0;
+  border-right-width: 2px;
+}
+
+.breadcrumbs>ul>li,
+.breadcrumbs>ul>ol {
+  opacity: 0.4;
+}
+
+.breadcrumbs>ul>li:last-child,
+.breadcrumbs>ul>ol:last-child {
+  opacity: 1;
 }
