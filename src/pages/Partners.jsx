@@ -1,7 +1,9 @@
-import instance from '@utils/api';
 import { MoreHorizontal } from 'lucide-react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useState, useEffect } from 'react';
+
+import instance from '@utils/api';
+import Body from '@components/Body';
 
 function Partners() {
   const [partners, setPartners] = useState([]);
@@ -47,7 +49,7 @@ function Partners() {
   // useEffect(getPartners, []);
 
   return (
-    <>
+    <Body>
       <h1 className="text-2xl text-primary my-4">Nosso Parceiros</h1>
       <p className="text-gray-500 italic font-normal">
         {Math.min((start + 1) * multiplier, partnersLimit)} de {partnersLimit}{' '}
@@ -133,7 +135,7 @@ function Partners() {
           </button>
         </div>
       )}
-    </>
+    </Body>
   );
 }
 

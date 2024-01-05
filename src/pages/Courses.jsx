@@ -1,5 +1,7 @@
+import Body from '@components/Body';
+
 function Courses() {
-  return <div>Cursos</div>;
+  return <Body>Cursos</Body>;
 }
 
 export default Courses;

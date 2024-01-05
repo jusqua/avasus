@@ -2,7 +2,7 @@ import Breadcrumbs from '@components/Breadcrumbs';
 import NavBar from '@components/NavBar';
 import Footer from '@components/Footer';
 
-function Wrapper({ children }) {
+function Body({ children }) {
   return (
     <NavBar>
       <div className="flex flex-1 justify-center">
@@ -16,4 +16,4 @@ function Wrapper({ children }) {
   );
 }
 
-export default Wrapper;
+export default Body;

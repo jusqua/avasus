@@ -1,5 +1,7 @@
+import Body from '@components/Body';
+
 function Contact() {
-  return <div>Contato</div>;
+  return <Body>Contato</Body>;
 }
 
 export default Contact;
