@@ -77,7 +77,7 @@ function NavBar({ children }) {
             <img src={LogoColour} className="h-6 sm:hidden" alt="AVASUS" />
           </header>
           <ul className="menu">
-            {routes.map(({ path, title }, i) => (
+            {routes[0].children.map(({ path, title }, i) => (
               <li key={i}>
                 <NavLink to={path}>{title}</NavLink>
               </li>
