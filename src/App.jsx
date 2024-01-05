@@ -8,7 +8,7 @@ import './index.css';
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
-      <Wrapper routes={routes}>
+      <Wrapper>
         <Routes>
           {routes.map(({ title, path, element }) => (
             <Route key={title} path={path} Component={element} />
