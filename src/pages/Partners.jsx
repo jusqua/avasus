@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import instance from '@utils/api';
 import Body from '@components/Body';
 import Pagination from '@components/Pagination';
+import Breadcrumbs from '@components/Breadcrumbs';
 
 function Partners() {
   const [partners, setPartners] = useState([]);
@@ -29,6 +30,7 @@ function Partners() {
 
   return (
     <Body>
+      <Breadcrumbs />
       <h1 className="text-2xl text-primary my-4">Nosso Parceiros</h1>
       <Pagination
         index={index}

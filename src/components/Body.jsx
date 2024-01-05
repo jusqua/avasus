@@ -7,7 +7,6 @@ function Body({ children }) {
     <NavBar>
       <div className="flex flex-1 justify-center">
         <main className="w-full lg:w-[1024px] p-4 flex flex-col">
-          <Breadcrumbs />
           {children}
         </main>
       </div>
