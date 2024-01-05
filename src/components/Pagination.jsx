@@ -1,13 +1,15 @@
 import { MoreHorizontal, ChevronLeft, ChevronRight } from 'lucide-react';
 
 const maxPaginationItems = 5;
+const firstCountLimit = Math.round(maxPaginationItems / 2);
 
 function getPaginationList(index, length) {
-  const firstCountLimit = Math.round(maxPaginationItems / 2);
   const after = [];
   const before = [];
 
   let remains = maxPaginationItems - 1;
+  remains += (index >= length - firstCountLimit - 1) * 2;
+  remains += (index < firstCountLimit + 1) * 2;
 
   for (let i = 1; index - i > 0 && i < firstCountLimit; i++, remains--)
     after.push(index - i);
@@ -46,13 +48,17 @@ function Pagination({
   loaded = true,
   children,
 }) {
+  function handleClick(index) {
+    return () => setIndex(index);
+  }
+
   function PaginationItem() {
     return (
       <div className="join my-2">
         <button
           className="join-item btn btn-sm btn-square"
           disabled={index === 0}
-          onClick={() => setIndex(Math.max(0, index - 1))}
+          onClick={handleClick(Math.max(0, index - 1))}
         >
           <ChevronLeft size="16" />
         </button>
@@ -61,10 +67,10 @@ function Pagination({
           type="radio"
           value={0}
           aria-label={1}
-          onChange={() => setIndex(0)}
+          onChange={handleClick(0)}
           checked={index === 0}
         />
-        {index < 5 ? null : (
+        {index < firstCountLimit + 1 ? null : (
           <button className="join-item btn btn-sm btn-square" disabled>
             <MoreHorizontal size="16" />
           </button>
@@ -76,11 +82,11 @@ function Pagination({
             type="radio"
             value={e}
             aria-label={e + 1}
-            onChange={() => setIndex(e)}
+            onChange={handleClick(e)}
             checked={index === e}
           />
         ))}
-        {length - 5 < index ? null : (
+        {index >= length - firstCountLimit - 1 ? null : (
           <button className="join-item btn btn-sm btn-square" disabled>
             <MoreHorizontal size="16" />
           </button>
@@ -90,13 +96,13 @@ function Pagination({
           type="radio"
           value={length - 1}
           aria-label={length}
-          onChange={() => setIndex(length - 1)}
+          onChange={handleClick(length - 1)}
           checked={index === length - 1}
         />
         <button
           className="join-item btn btn-sm btn-square"
           disabled={index === length - 1}
-          onClick={() => setIndex(Math.min(index + 1, length - 1))}
+          onClick={handleClick(Math.min(index + 1, length - 1))}
         >
           <ChevronRight size="16" />
         </button>
