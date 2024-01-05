@@ -114,7 +114,7 @@ function Pagination({
     <div className="flex flex-col">
       <p className="text-gray-500 italic font-normal">
         {!loaded ? (
-          <div className="skeleton h-6 w-48"></div>
+          <span className="skeleton h-6 w-48"></span>
         ) : (
           `${Math.min((index + 1) * multiplier, limit)} de ${limit} resultados`
         )}

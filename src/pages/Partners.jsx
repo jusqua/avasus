@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 
 import instance from '@utils/api';
-import Body from '@components/Body';
 import Pagination from '@components/Pagination';
 import Breadcrumbs from '@components/Breadcrumbs';
 
@@ -24,7 +23,8 @@ function Partners() {
           setLength(Math.round(response.headers['x-total-count'] / multiplier));
           setLoaded(true);
         }
-      });
+      })
+      .catch(() => { });
     return () => { };
   }, [index, length, multiplier, limit, loaded]);
 
@@ -45,7 +45,7 @@ function Partners() {
             ? [...Array(multiplier).keys()].map((e) => (
               <div className="flex flex-col gap-1" key={e}>
                 <div className="skeleton h-48"></div>
-                <p className="skeleton py-2"></p>
+                <span className="skeleton py-2"></span>
               </div>
             ))
             : partners.map(({ id, capa, titulo }) => (
