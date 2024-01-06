@@ -1,4 +1,4 @@
-import { MoreHorizontal, ChevronLeft, ChevronRight } from 'lucide-react';
+import { DotsThree, CaretLeft, CaretRight } from '@phosphor-icons/react';
 
 const maxPaginationItems = 5;
 const firstCountLimit = Math.round(maxPaginationItems / 2);
@@ -60,7 +60,7 @@ function Pagination({
           disabled={index === 0}
           onClick={handleClick(Math.max(0, index - 1))}
         >
-          <ChevronLeft size="16" />
+          <CaretLeft weight="bold" />
         </button>
         <input
           className="join-item btn btn-sm btn-square"
@@ -72,7 +72,7 @@ function Pagination({
         />
         {index < firstCountLimit + 1 ? null : (
           <button className="join-item btn btn-sm btn-square" disabled>
-            <MoreHorizontal size="16" />
+            <DotsThree weight="bold" />
           </button>
         )}
         {getPaginationList(index, length).map((e) => (
@@ -88,7 +88,7 @@ function Pagination({
         ))}
         {index >= length - firstCountLimit - 1 ? null : (
           <button className="join-item btn btn-sm btn-square" disabled>
-            <MoreHorizontal size="16" />
+            <DotsThree weight="bold" />
           </button>
         )}
         <input
@@ -104,7 +104,7 @@ function Pagination({
           disabled={index === length - 1}
           onClick={handleClick(Math.min(index + 1, length - 1))}
         >
-          <ChevronRight size="16" />
+          <CaretRight weight="bold" />
         </button>
       </div>
     );

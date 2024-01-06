@@ -1,4 +1,4 @@
-import { Search, Menu, X } from 'lucide-react';
+import { MagnifyingGlass, List, X } from '@phosphor-icons/react';
 import { NavLink } from 'react-router-dom';
 
 import LogoColour from '@assets/logo-colour.svg';
@@ -25,7 +25,10 @@ function NavBar({ children }) {
             </div>
             <div className="flex-1 justify-end">
               <label htmlFor="query" className="relative">
-                <Search className="w-6 h-6 absolute top-1/2 transform -translate-y-1/2 left-3 stroke-neutral" />
+                <MagnifyingGlass
+                  size="24"
+                  className="absolute top-1/2 transform -translate-y-1/2 left-3 stroke-neutral"
+                />
                 <input
                   id="query"
                   name="query"
@@ -52,7 +55,7 @@ function NavBar({ children }) {
                 aria-label="Abrir menu lateral"
                 className="btn btn-square btn-ghost"
               >
-                <Menu className="stroke-neutral" />
+                <List size="24" className="stroke-neutral" />
               </label>
             </div>
           </header>
@@ -72,7 +75,7 @@ function NavBar({ children }) {
               aria-label="Fechar barra lateral"
               className="btn btn-square btn-ghost self-end"
             >
-              <X className="stroke-neutral" />
+              <X size="24" className="stroke-neutral" />
             </label>
             <img src={LogoColour} className="h-6 sm:hidden" alt="AVASUS" />
           </header>

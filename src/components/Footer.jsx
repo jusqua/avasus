@@ -1,4 +1,8 @@
-import { Facebook, Twitter, Instagram } from 'lucide-react';
+import {
+  FacebookLogo,
+  TwitterLogo,
+  InstagramLogo,
+} from '@phosphor-icons/react';
 import { NavLink } from 'react-router-dom';
 
 import LaisLogo from '@assets/lais-logo.svg';
@@ -38,13 +42,13 @@ function Footer() {
           </header>
           <div className="flex gap-8">
             <a href="#" className="link">
-              <Facebook strokeWidth={0.5} className="stroke-white fill-white" />
+              <FacebookLogo size="24" weight="fill" color="white" />
             </a>
             <a href="#" className="link">
-              <Twitter strokeWidth={0.5} className="stroke-white fill-white" />
+              <TwitterLogo size="24" weight="fill" color="white" />
             </a>
             <a href="#" className="link">
-              <Instagram strokeWidth={2} className="stroke-white" />
+              <InstagramLogo size="24" weight="bold" color="white" />
             </a>
           </div>
         </nav>
