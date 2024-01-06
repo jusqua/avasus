@@ -46,14 +46,14 @@ function Transparency() {
     <>
       <Breadcrumbs />
       <h1 className="text-4xl text-primary text-center my-4">Transparência</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 grid-flow-row-dense gap-6 *:rounded-2xl *:bg-base-200 *:shadow-md">
-        <div className="flex col-span-2 h-64">
+      <div className="grid grid-cols-1 md:grid-cols-2 grid-flow-row-dense gap-6 *:rounded-2xl *:bg-base-200 *:shadow-md">
+        <div className="flex md:col-span-2 min-h-64">
           {!loaded ? (
             <div className="skeleton w-full h-full"></div>
           ) : (
-            <div className="flex flex-col flex-1 justify-evenly m-4 items-center">
+            <div className="flex flex-col flex-1 justify-evenly m-6 items-center">
               <h2 className="text-2xl text-primary p-2">Dados Gerais</h2>
-              <div className="grid items-center grid-cols-3 grid-flow-row-dense gap-2 flex-1 w-full">
+              <div className="grid items-center grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 grid-flow-row-dense gap-3 flex-1 w-full">
                 <IconContext.Provider
                   value={{
                     className: 'fill-primary stroke-primary',
@@ -112,14 +112,14 @@ function Transparency() {
             </div>
           )}
         </div>
-        <div className="h-[36rem]">
+        <div className="min-h-[36rem]">
           {!loaded ? (
             <div className="skeleton w-full h-full"></div>
           ) : (
             <div></div>
           )}
         </div>
-        <div className="h-[36rem]">
+        <div className="min-h-[36rem]">
           {!loaded ? (
             <div className="skeleton w-full h-full"></div>
           ) : (
