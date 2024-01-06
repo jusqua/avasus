@@ -1,14 +1,12 @@
 import { useEffect, useState } from 'react';
 import {
+  IconContext,
   UsersFour,
   FileArrowUp,
   GraduationCap,
   Certificate,
-  IconContext,
-  Person,
-  Coins,
+  CurrencyDollar,
   User,
-  Money,
 } from '@phosphor-icons/react';
 
 import instance from '@utils/api';
@@ -87,9 +85,9 @@ function Transparency() {
                     icon={
                       <div className="relative">
                         <GraduationCap />
-                        <Coins
-                          className="brightness-150 fill-primary stroke-primary absolute -bottom-1 -right-1"
-                          size="12"
+                        <CurrencyDollar
+                          className="fill-primary stroke-primary absolute -top-2 -left-2"
+                          size="14"
                         />
                       </div>
                     }
@@ -100,9 +98,9 @@ function Transparency() {
                     icon={
                       <div className="relative">
                         <User />
-                        <Coins
-                          className="brightness-150 fill-primary stroke-primary absolute -bottom-1 -right-1"
-                          size="12"
+                        <CurrencyDollar
+                          className="fill-primary stroke-primary absolute -top-2 -left-2"
+                          size="14"
                         />
                       </div>
                     }
