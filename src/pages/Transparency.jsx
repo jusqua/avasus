@@ -1,4 +1,7 @@
 import { useEffect, useState } from 'react';
+import { Chart } from 'chart.js';
+import ChartJS from 'chart.js/auto';
+
 import {
   IconContext,
   UsersFour,
@@ -101,10 +104,15 @@ function Transparency() {
           </div>
         </div>
         <div className="min-h-[36rem]">
-          <div></div>
+          <div className="flex flex-col flex-1 justify-evenly m-6 items-center">
+            <h2 className="text-xl text-primary p-2">Usuários por curso</h2>
+            <UsersPerCourseChart usersData={data?.usuarios_por_curso} />
+          </div>
         </div>
         <div className="min-h-[36rem]">
-          <div></div>
+          <div className="flex flex-col flex-1 justify-evenly m-6 items-center">
+            <h2 className="text-xl text-primary p-2">Usuários por estado</h2>
+          </div>
         </div>
       </div>
     </>
@@ -125,6 +133,48 @@ function GeneralDataItem({ loaded, title, content, icon }) {
       )}
     </div>
   );
+}
+
+function UsersPerCourseChart({ usersData }) {
+  useEffect(() => {
+    if (!usersData) return;
+
+    const canvas = document.getElementById('users-per-course-chart');
+    if (!canvas) return;
+
+    const chart = Chart.getChart('users-per-course-chart');
+    if (chart != undefined) chart.destroy();
+
+    new Chart(canvas, {
+      type: 'pie',
+      data: {
+        labels: usersData.map(({ curso }) => curso),
+        datasets: [
+          {
+            label: 'Usuários',
+            data: usersData.map(({ usuarios }) => usuarios),
+            backgroundColor: ['#FFFFFF', '#D2202C', '#707070', '#2F2E41'],
+            hoverOffset: 16,
+          },
+        ],
+      },
+      options: {
+        plugins: {
+          legend: {
+            position: 'bottom',
+            labels: {
+              boxWidth: 20,
+              boxHeight: 20,
+            },
+          },
+        },
+      },
+    });
+
+    return () => { };
+  }, [usersData]);
+
+  return <canvas id="users-per-course-chart"></canvas>;
 }
 
 export default Transparency;
