@@ -1,6 +1,4 @@
 import { useEffect, useState } from 'react';
-import { Chart as ChartJS } from 'chart.js';
-import 'chart.js/auto';
 import { Chart } from 'react-google-charts';
 
 import {
@@ -105,16 +103,50 @@ function Transparency() {
             </div>
           </div>
         </div>
-        <div className="min-h-64">
+        <div className="h-[30rem]">
           <div className="flex flex-col flex-1 justify-evenly m-6 items-center">
             <h2 className="text-xl text-primary p-2">Usuários por curso</h2>
-            <UsersPerCourseChart usersData={data?.usuarios_por_curso} />
+            {!loaded ? (
+              <div className="skeleton h-96 w-96 rounded-full scale-80"></div>
+            ) : (
+              <Chart
+                chartType="PieChart"
+                width="100%"
+                height="24rem"
+                data={[
+                  ['Curso', 'Usuários'],
+                  ...data.usuarios_por_curso.map(({ curso, usuarios }) => [
+                    curso,
+                    usuarios,
+                  ]),
+                ]}
+                options={{
+                  backgroundColor: 'transparent',
+                  colors: ['#FFFFFF', '#D2202C', '#707070', '#2F2E41'],
+                  chartArea: { height: '80%', width: '80%' },
+                  legend: 'none',
+                }}
+                formatters={[
+                  {
+                    type: 'NumberFormat',
+                    column: 1,
+                    options: {
+                      decimalSymbol: ',',
+                      groupingSymbol: '.',
+                      fractionDigits: 0,
+                    },
+                  },
+                ]}
+              />
+            )}
           </div>
         </div>
-        <div className="min-h-64">
+        <div className="h-[30rem]">
           <div className="flex flex-col flex-1 justify-evenly m-6 items-center">
             <h2 className="text-xl text-primary p-2">Usuários por estado</h2>
-            {!loaded ? null : (
+            {!loaded ? (
+              <div className="skeleton h-96 w-96 scale-80"></div>
+            ) : (
               <Chart
                 chartType="GeoChart"
                 className="h-full w-full flex-1"
@@ -172,48 +204,6 @@ function GeneralDataItem({ loaded, title, content, icon }) {
       )}
     </div>
   );
-}
-
-function UsersPerCourseChart({ usersData }) {
-  useEffect(() => {
-    if (!usersData) return;
-
-    const canvas = document.getElementById('users-per-course-chart');
-    if (!canvas) return;
-
-    const chart = ChartJS.getChart('users-per-course-chart');
-    if (chart != undefined) chart.destroy();
-
-    new ChartJS(canvas, {
-      type: 'pie',
-      data: {
-        labels: usersData.map(({ curso }) => curso),
-        datasets: [
-          {
-            label: 'Usuários',
-            data: usersData.map(({ usuarios }) => usuarios),
-            backgroundColor: ['#FFFFFF', '#D2202C', '#707070', '#2F2E41'],
-            hoverOffset: 16,
-          },
-        ],
-      },
-      options: {
-        plugins: {
-          legend: {
-            position: 'bottom',
-            labels: {
-              boxWidth: 20,
-              boxHeight: 20,
-            },
-          },
-        },
-      },
-    });
-
-    return () => { };
-  }, [usersData]);
-
-  return <canvas id="users-per-course-chart"></canvas>;
 }
 
 export default Transparency;
