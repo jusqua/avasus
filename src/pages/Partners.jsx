@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import instance from '@utils/api';
 import Pagination from '@components/Pagination';
 import Breadcrumbs from '@components/Breadcrumbs';
+import Main from '@components/Main';
 
 function Partners() {
   const [partners, setPartners] = useState([]);
@@ -29,7 +30,7 @@ function Partners() {
   }, [index, length, multiplier, limit, loaded]);
 
   return (
-    <>
+    <Main>
       <Breadcrumbs />
       <h1 className="text-4xl text-primary my-4">Nossos Parceiros</h1>
       <Pagination
@@ -60,7 +61,7 @@ function Partners() {
             ))}
         </div>
       </Pagination>
-    </>
+    </Main>
   );
 }
 

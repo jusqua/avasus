@@ -13,6 +13,7 @@ import {
 import instance from '@utils/api';
 import iso from '@utils/iso';
 import Breadcrumbs from '@components/Breadcrumbs';
+import Main from '@components/Main';
 
 function Transparency() {
   const [data, setData] = useState({});
@@ -33,7 +34,7 @@ function Transparency() {
   }, [data, loaded]);
 
   return (
-    <>
+    <Main>
       <Breadcrumbs />
       <h1 className="text-4xl text-primary text-center my-4">Transparência</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 grid-flow-row-dense gap-6 *:rounded-2xl *:bg-base-200 *:shadow-md">
@@ -196,7 +197,7 @@ function Transparency() {
           </div>
         </div>
       </div>
-    </>
+    </Main>
   );
 }
 
