@@ -1,13 +1,21 @@
 import { MagnifyingGlass, List, X } from '@phosphor-icons/react';
 import { NavLink } from 'react-router-dom';
+import { useRef } from 'react';
 
 import LogoColour from '@assets/logo-colour.svg';
 import routes from '@utils/routes';
 
 function NavBar({ children }) {
+  const navbarDrawerRef = useRef(null);
+
   return (
     <div className="drawer drawer-end min-h-screen">
-      <input id="navbar-drawer" type="checkbox" className="drawer-toggle" />
+      <input
+        ref={navbarDrawerRef}
+        id="navbar-drawer"
+        type="checkbox"
+        className="drawer-toggle"
+      />
       <div className="drawer-content flex flex-col">
         <nav className="flex justify-center shadow sticky top-0 z-10 bg-base-100">
           <header className="navbar p-4 xl:w-[1280px] gap-2">
@@ -85,7 +93,7 @@ function NavBar({ children }) {
                 <NavLink
                   to={path}
                   onClick={() => {
-                    document.getElementById('navbar-drawer').checked = false;
+                    navbarDrawerRef.current.checked = false;
                   }}
                 >
                   {title}
