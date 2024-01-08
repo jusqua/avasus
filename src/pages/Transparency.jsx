@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
-import { Chart } from 'chart.js';
-import ChartJS from 'chart.js/auto';
+import { Chart as ChartJS } from 'chart.js';
+import 'chart.js/auto';
+import { Chart } from 'react-google-charts';
 
 import {
   IconContext,
@@ -13,6 +14,7 @@ import {
 } from '@phosphor-icons/react';
 
 import instance from '@utils/api';
+import iso from '@utils/iso';
 import Breadcrumbs from '@components/Breadcrumbs';
 
 function Transparency() {
@@ -103,15 +105,52 @@ function Transparency() {
             </div>
           </div>
         </div>
-        <div className="min-h-[36rem]">
+        <div className="min-h-64">
           <div className="flex flex-col flex-1 justify-evenly m-6 items-center">
             <h2 className="text-xl text-primary p-2">Usuários por curso</h2>
             <UsersPerCourseChart usersData={data?.usuarios_por_curso} />
           </div>
         </div>
-        <div className="min-h-[36rem]">
+        <div className="min-h-64">
           <div className="flex flex-col flex-1 justify-evenly m-6 items-center">
             <h2 className="text-xl text-primary p-2">Usuários por estado</h2>
+            {!loaded ? null : (
+              <Chart
+                chartType="GeoChart"
+                className="h-full w-full flex-1"
+                data={[
+                  ['Estado', 'Usuários', 'Certificados'],
+                  ...data.usuarios_por_estado.map(
+                    ({ estados, usuarios_totais, direito_certificacao }) => [
+                      iso[estados],
+                      usuarios_totais,
+                      direito_certificacao,
+                    ],
+                  ),
+                ]}
+                options={{
+                  region: 'BR',
+                  displayMode: 'regions',
+                  resolution: 'provinces',
+                  backgroundColor: 'transparent',
+                  colorAxis: {
+                    colors: ['#FFFFFF', '#D2202C', '#707070', '#2F2E41'],
+                  },
+                  datalessRegionColor: 'transparent',
+                  defaultColor: '#f5f5f5',
+                  legend: 'none',
+                }}
+                formatters={[1, 2].map((e) => ({
+                  type: 'NumberFormat',
+                  column: e,
+                  options: {
+                    decimalSymbol: ',',
+                    groupingSymbol: '.',
+                    fractionDigits: 0,
+                  },
+                }))}
+              />
+            )}
           </div>
         </div>
       </div>
@@ -142,10 +181,10 @@ function UsersPerCourseChart({ usersData }) {
     const canvas = document.getElementById('users-per-course-chart');
     if (!canvas) return;
 
-    const chart = Chart.getChart('users-per-course-chart');
+    const chart = ChartJS.getChart('users-per-course-chart');
     if (chart != undefined) chart.destroy();
 
-    new Chart(canvas, {
+    new ChartJS(canvas, {
       type: 'pie',
       data: {
         labels: usersData.map(({ curso }) => curso),
