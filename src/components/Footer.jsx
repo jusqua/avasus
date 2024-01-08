@@ -11,7 +11,7 @@ import routes from '@utils/routes';
 
 function Footer() {
   return (
-    <footer className="flex flex-col w-full text-white">
+    <footer className="flex flex-col w-full mt-16 text-white">
       <div className="bg-primary flex flex-col gap-4 sm:gap-8 p-8">
         <p className="text-center">Realização</p>
         <div className="flex flex-col sm:flex-row gap-8 sm:gap-24 justify-center">
