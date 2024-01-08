@@ -1,5 +1,7 @@
+import WorkInProgress from '@components/WorkInProgress';
+
 function Courses() {
-  return <>Cursos</>;
+  return <WorkInProgress />;
 }
 
 export default Courses;

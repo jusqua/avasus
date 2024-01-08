@@ -1,5 +1,7 @@
+import WorkInProgress from '@components/WorkInProgress';
+
 function Home() {
-  return <>Home</>;
+  return <WorkInProgress />;
 }
 
 export default Home;
