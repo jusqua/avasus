@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { Chart } from 'react-google-charts';
 
 import {
-  IconContext,
   UsersFour,
   FileArrowUp,
   GraduationCap,
@@ -42,64 +41,75 @@ function Transparency() {
           <div className="flex flex-col flex-1 justify-evenly m-6 items-center">
             <h2 className="text-2xl text-primary p-2">Dados Gerais</h2>
             <div className="grid items-center grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 grid-flow-row-dense gap-3 flex-1 w-full">
-              <IconContext.Provider
-                value={{
-                  className: 'fill-primary stroke-primary',
-                  size: '20',
-                  weight: 'fill',
-                }}
-              >
-                <GeneralDataItem
-                  loaded={loaded}
-                  title="Total de usuários registrados"
-                  content={data.dados_gerais?.usuarios_registrados}
-                  icon={<UsersFour />}
-                />
-                <GeneralDataItem
-                  loaded={loaded}
-                  title="Inscrições realizadas"
-                  content={data.dados_gerais?.incricoes_realizadas}
-                  icon={<FileArrowUp />}
-                />
-                <GeneralDataItem
-                  loaded={loaded}
-                  title="Cursos ativos"
-                  content={data.dados_gerais?.cursos_ativos}
-                  icon={<GraduationCap />}
-                />
-                <GeneralDataItem
-                  loaded={loaded}
-                  title="Direito à certificação"
-                  content={data.dados_gerais?.direito_certificacao}
-                  icon={<Certificate />}
-                />
-                <GeneralDataItem
-                  loaded={loaded}
-                  title="Investimento médio por curso"
-                  content={data.dados_gerais?.investimento_medio_curso}
-                  icon={
-                    <div className="relative">
-                      <GraduationCap />
-                      <div className="absolute -top-2 -left-2">
-                        <CurrencyDollar size="14" />
+              {[
+                [
+                  'Total de usuários registrados',
+                  data.dados_gerais?.incricoes_realizadas,
+                  UsersFour,
+                ],
+                [
+                  'Inscrições Realizadas',
+                  data.dados_gerais?.incricoes_realizadas,
+                  FileArrowUp,
+                ],
+                [
+                  'Cursos Ativos',
+                  data.dados_gerais?.cursos_ativos,
+                  GraduationCap,
+                ],
+                [
+                  'Direito à Certificação',
+                  data.dados_gerais?.direito_certificacao,
+                  Certificate,
+                ],
+                [
+                  'Investimento médio por curso',
+                  data.dados_gerais?.investimento_medio_curso,
+                  GraduationCap,
+                  CurrencyDollar,
+                ],
+                [
+                  'Total de usuários registrados',
+                  data.dados_gerais?.incricoes_realizadas,
+                  User,
+                  CurrencyDollar,
+                ],
+              ].map((e, i) => {
+                const [title, content, Icon, TopIcon] = e;
+                return (
+                  <div
+                    key={i}
+                    className="flex flex-col gap-1 justify-center text-center"
+                  >
+                    <span className="flex gap-1 items-center justify-center">
+                      <div className="relative">
+                        <Icon
+                          size="20"
+                          className="fill-primary stroke-primary"
+                          weight="fill"
+                        />
+                        {TopIcon === undefined ? null : (
+                          <div className="absolute -top-2 -left-2">
+                            <TopIcon
+                              size="14"
+                              className="fill-primary stroke-primary"
+                              weight="fill"
+                            />
+                          </div>
+                        )}
                       </div>
-                    </div>
-                  }
-                />
-                <GeneralDataItem
-                  loaded={loaded}
-                  title="Investimento médio por aluno"
-                  content={data.dados_gerais?.investimento_medio_aluno}
-                  icon={
-                    <div className="relative">
-                      <User />
-                      <div className="absolute -top-2 -left-2">
-                        <CurrencyDollar size="14" />
-                      </div>
-                    </div>
-                  }
-                />
-              </IconContext.Provider>
+                      <p className="text-sm">{title}</p>
+                    </span>
+                    {!content ? (
+                      <div className="skeleton h-8 w-full"></div>
+                    ) : (
+                      <p className="text-2xl text-primary">
+                        {content.toLocaleString('pt-BR')}
+                      </p>
+                    )}
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
@@ -187,22 +197,6 @@ function Transparency() {
         </div>
       </div>
     </>
-  );
-}
-
-function GeneralDataItem({ loaded, title, content, icon }) {
-  return (
-    <div className="flex flex-col gap-1 justify-center text-center">
-      <span className="flex gap-1 items-center justify-center">
-        {icon}
-        <p className="text-sm">{title}</p>
-      </span>
-      {!loaded ? (
-        <div className="skeleton h-8 w-full"></div>
-      ) : (
-        <p className="text-2xl text-primary">{content}</p>
-      )}
-    </div>
   );
 }
 
