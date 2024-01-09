@@ -34,7 +34,7 @@ function Home() {
             alt="AVASUS"
             className="brightness-0 invert w-1/3 drop-shadow-lg"
           />
-          <div className="border-2 rounded w-1/6 m-2"></div>
+          <div className="rounded w-1/6 border sm:border-2"></div>
           <p className="text-white text-center text-sm sm:text-xl md:text-2xl lg:text-4xl xl:text-6xl drop-shadow-lg">
             Conhecimento Aberto em Saúde
           </p>
