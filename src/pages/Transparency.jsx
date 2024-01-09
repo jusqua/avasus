@@ -114,15 +114,14 @@ function Transparency() {
             </div>
           </div>
         </div>
-        <div className="h-[30rem]">
+        <div className="h-[28rem] overflow-hidden">
           <div className="flex flex-col flex-1 justify-evenly m-6 items-center">
             <h2 className="text-xl text-primary p-2">Usuários por curso</h2>
             {!loaded ? (
-              <div className="skeleton h-96 w-96 rounded-full scale-80"></div>
+              <div className="skeleton h-80 w-80 rounded-full scale-80"></div>
             ) : (
               <Chart
                 chartType="PieChart"
-                width="100%"
                 height="24rem"
                 data={[
                   ['Curso', 'Usuários'],
@@ -152,15 +151,15 @@ function Transparency() {
             )}
           </div>
         </div>
-        <div className="h-[30rem]">
+        <div className="h-[28rem] overflow-hidden">
           <div className="flex flex-col flex-1 justify-evenly m-6 items-center">
             <h2 className="text-xl text-primary p-2">Usuários por estado</h2>
             {!loaded ? (
-              <div className="skeleton h-96 w-96 scale-80"></div>
+              <div className="skeleton h-80 w-80 scale-80"></div>
             ) : (
               <Chart
+                className="relative left-5"
                 chartType="GeoChart"
-                className="h-full w-full flex-1"
                 data={[
                   ['Estado', 'Usuários', 'Certificados'],
                   ...data.usuarios_por_estado.map(
@@ -182,6 +181,7 @@ function Transparency() {
                   datalessRegionColor: 'transparent',
                   defaultColor: '#f5f5f5',
                   legend: 'none',
+                  keepAspectRatio: false,
                 }}
                 formatters={[1, 2].map((e) => ({
                   type: 'NumberFormat',
