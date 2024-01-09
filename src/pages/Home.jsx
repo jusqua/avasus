@@ -84,64 +84,72 @@ function Home() {
               </p>
             </label>
           </nav>
-          {data.length === 0 ? (
-            <div></div>
-          ) : (
-            data.map(
+          {data.length === 0
+            ? [...Array(3).keys()].map((_, i) => (
+              <div
+                key={i}
+                className="h-30 w-full bg-base-200 rounded-2xl skeleton p-12"
+              ></div>
+            ))
+            : data.map(
               (
                 { capa, titulo, parceiros, matriculados, duracao, avaliacao },
                 i,
               ) => (
-                <div key={i} className="flex flex-col">
-                  <div className="flex flex-col md:flex-row h-30 bg-base-200 gap-4 p-4 rounded-2xl">
-                    <div className="flex gap-4 flex-1 items-center">
-                      <div className="h-20 w-20 rounded-2xl bg-white overflow-hidden">
-                        <img src={capa} className="object-fit w-full h-full" />
-                      </div>
-                      <div className="flex flex-col flex-1 justify-evenly w-32">
-                        <h2 className="text-md lg:text-xl">{titulo}</h2>
-                        <h3 className="text-sm lg:text-md text-primary">
-                          {parceiros}
-                        </h3>
-                      </div>
+                <div
+                  key={i}
+                  className="flex flex-col md:flex-row h-30 bg-base-200 gap-4 p-4 rounded-2xl"
+                >
+                  <div className="flex gap-4 flex-1 items-center">
+                    <div className="h-20 w-20 rounded-2xl skeleton overflow-hidden">
+                      <img
+                        src={capa}
+                        key={capa}
+                        className="object-fit w-full h-full"
+                      />
                     </div>
-                    <div className="flex flex-col sm:flex-row gap-4 self-center">
-                      <div className="flex flex-col md:flex-row gap-2 sm:gap-4">
-                        <div className="flex gap-4">
-                          <div className="flex items-center justify-center gap-2">
-                            <Users
-                              size="20"
-                              weight="fill"
-                              className="fill-primary stroke-primary"
-                            />
-                            <span>{matriculados.toLocaleString('pt-BR')}</span>
-                          </div>
-                          <div className="flex items-center justify-center gap-2">
-                            <Clock
-                              size="20"
-                              weight="fill"
-                              className="fill-primary stroke-primary"
-                            />
-                            <span>{duracao.trim()}</span>
-                          </div>
+                    <div className="flex flex-col flex-1 justify-evenly w-32">
+                      <h2 className="text-md lg:text-xl">{titulo}</h2>
+                      <h3 className="text-sm lg:text-md text-primary">
+                        {parceiros}
+                      </h3>
+                    </div>
+                  </div>
+                  <div className="flex flex-col sm:flex-row gap-4 self-center">
+                    <div className="flex flex-col md:flex-row gap-2 sm:gap-4">
+                      <div className="flex gap-4">
+                        <div className="flex items-center justify-center gap-2">
+                          <Users
+                            size="20"
+                            weight="fill"
+                            className="fill-primary stroke-primary"
+                          />
+                          <span>{matriculados.toLocaleString('pt-BR')}</span>
                         </div>
                         <div className="flex items-center justify-center gap-2">
-                          <Rating rating={Number.parseFloat(avaliacao)} />
-                          <span>{avaliacao}</span>
+                          <Clock
+                            size="20"
+                            weight="fill"
+                            className="fill-primary stroke-primary"
+                          />
+                          <span>{duracao.trim()}</span>
                         </div>
                       </div>
-                      <Link
-                        className="self-center btn btn-sm btn-neutral rounded-full"
-                        to="/courses"
-                      >
-                        Ver módulo
-                      </Link>
+                      <div className="flex items-center justify-center gap-2">
+                        <Rating rating={Number.parseFloat(avaliacao)} />
+                        <span>{avaliacao}</span>
+                      </div>
                     </div>
+                    <Link
+                      className="self-center btn btn-sm btn-neutral rounded-full"
+                      to="/courses"
+                    >
+                      Ver módulo
+                    </Link>
                   </div>
                 </div>
               ),
-            )
-          )}
+            )}
           <Link
             className="self-center btn btn-sm btn-wide btn-neutral rounded-full"
             to="/courses"
