@@ -50,9 +50,13 @@ function Partners() {
               </div>
             ))
             : partners.map(({ id, capa, titulo }) => (
-              <div key={id}>
+              <div className="flex flex-col gap-1" key={id}>
                 <div className="flex justify-center h-48">
-                  <img className="object-contain" src={capa} />
+                  <img
+                    className="object-contain bg-base-100"
+                    src={capa}
+                    key={capa}
+                  />
                 </div>
                 <p className="py-2 text-center border-t border-primary h-24">
                   {titulo}
