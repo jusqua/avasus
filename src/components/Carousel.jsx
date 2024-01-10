@@ -11,16 +11,19 @@ function Carousel({ slideshow }) {
 
   useEffect(() => {
     const element = carouselRef.current;
-    element.addEventListener('scroll', () => {
+    const handleScrollEvent = () => {
       const index = element.scrollLeft / element.offsetWidth;
       if (Number.isInteger(index)) setIndex(index);
-    });
-  }, [slideshow]);
+    };
+
+    element.addEventListener('scroll', handleScrollEvent);
+    return () => element.removeEventListener('scroll', handleScrollEvent);
+  }, []);
 
   useEffect(() => {
     const element = carouselRef.current;
     element.scrollTo(element.offsetWidth * index, 0);
-  }, [index, slideshow]);
+  }, [index]);
 
   if (!slideshow) return;
 
@@ -28,7 +31,7 @@ function Carousel({ slideshow }) {
     <div className="relative">
       <div ref={carouselRef} id="carousel" className="carousel w-full">
         {slideshow.map((e, i) => (
-          <div key={i} className="carousel-item w-full">
+          <div key={i} className="carousel-item snap-none w-full">
             <img src={e} />
           </div>
         ))}
