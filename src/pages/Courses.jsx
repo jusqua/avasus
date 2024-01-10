@@ -28,6 +28,16 @@ function Courses() {
   const [length, setLength] = useState(0);
   const [multiplier] = useState(6);
 
+  function handleOption(setState) {
+    return (e) => {
+      setIndex(0);
+      setLoaded(false);
+      setLength(0);
+      setLimit(0);
+      setState(e.target.value);
+    };
+  }
+
   useEffect(() => {
     if (categories.length !== 0) {
       instance
@@ -97,7 +107,7 @@ function Courses() {
                     name="categories"
                     value={e}
                     className="hidden"
-                    onChange={(e) => setCategorieType(e.target.value)}
+                    onChange={handleOption(setCategorieType)}
                     checked={e === categorieType}
                   />
                   <p>{e}</p>
@@ -143,7 +153,7 @@ function Courses() {
                     value={value}
                     className="hidden"
                     checked={value === orderType}
-                    onChange={(e) => setOrderType(e.target.value)}
+                    onChange={handleOption(setOrderType)}
                   />
                   <p>{title}</p>
                 </label>
@@ -187,7 +197,7 @@ function Courses() {
                     value={value}
                     className="hidden"
                     checked={value === filterType}
-                    onChange={(e) => setFilterType(e.target.value)}
+                    onChange={handleOption(setFilterType)}
                   />
                   <p>{title}</p>
                 </label>
