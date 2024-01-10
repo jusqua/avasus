@@ -1,4 +1,11 @@
-import { Clock, Users } from '@phosphor-icons/react';
+import {
+  Clock,
+  GridFour,
+  SortAscending,
+  SortDescending,
+  Users,
+  Funnel,
+} from '@phosphor-icons/react';
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
@@ -10,8 +17,8 @@ import instance from '@utils/api';
 
 function Courses() {
   const [categorieType, setCategorieType] = useState('');
-  const [orderType, setOrder] = useState('desc');
-  const [filterType, setFilter] = useState('avaliacao');
+  const [orderType, setOrderType] = useState('desc');
+  const [filterType, setFilterType] = useState('matriculados');
 
   const [categories, setCategories] = useState([]);
   const [data, setData] = useState([]);
@@ -25,7 +32,7 @@ function Courses() {
     if (categories.length !== 0) {
       instance
         .get(
-          `/cursos?cateroria=${categorieType}&_sort${filterType}&_order=${orderType}&_start=${index}&_limit=${multiplier}`,
+          `/cursos?cateroria=${categorieType}&_sort=${filterType}&_order=${orderType}&_start=${index}&_limit=${multiplier}`,
         )
         .then((response) => {
           setData(response.data);
@@ -64,41 +71,130 @@ function Courses() {
       <h1 className="text-4xl text-primary text-center my-4">
         Módulos Educacionais
       </h1>
-      <nav className="flex gap-2 my-2">
-        <label>
-          <input
-            type="radio"
-            name="modules"
-            value="matriculados"
-            className="peer hidden"
-            defaultChecked
-          />
-          <p className="btn btn-sm btn-ghost peer-checked:btn-active">
-            Mais populares
-          </p>
-        </label>
-        <label>
-          <input
-            type="radio"
-            name="modules"
-            value="avalicao"
-            className="peer hidden"
-          />
-          <p className="btn btn-sm btn-ghost peer-checked:btn-active">
-            Mais bem avaliados
-          </p>
-        </label>
-        <label>
-          <input
-            type="radio"
-            name="modules"
-            value="criado_em"
-            className="peer hidden"
-          />
-          <p className="btn btn-sm btn-ghost peer-checked:btn-active">
-            Mais recentes
-          </p>
-        </label>
+      <nav className="flex flex-wrap gap-2 my-2">
+        <div className="dropdown">
+          <div
+            tabIndex="0"
+            role="button"
+            className="btn btn-sm focus-within:btn-active"
+          >
+            <GridFour
+              weight="fill"
+              size="20"
+              className="fill-primary pointer-events-none"
+            />
+            {categorieType}
+          </div>
+          <ul
+            tabIndex="0"
+            className="menu dropdown-content z-[1] bg-base-200 shadow"
+          >
+            {categories.map((e, i) => (
+              <li key={i}>
+                <label>
+                  <input
+                    type="radio"
+                    name="categories"
+                    value={e}
+                    className="hidden"
+                    onChange={(e) => setCategorieType(e.target.value)}
+                    checked={e === categorieType}
+                  />
+                  <p>{e}</p>
+                </label>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className="dropdown">
+          <div
+            tabIndex="0"
+            role="button"
+            className="btn btn-sm focus-within:btn-active"
+          >
+            {orderType === 'asc' ? (
+              <SortAscending
+                weight="fill"
+                size="20"
+                className="fill-primary pointer-events-none"
+              />
+            ) : (
+              <SortDescending
+                weight="fill"
+                size="20"
+                className="fill-primary pointer-events-none"
+              />
+            )}
+            {orderType === 'asc' ? 'Crescente' : 'Decrescente'}
+          </div>
+          <ul
+            tabIndex="0"
+            className="menu dropdown-content z-[1] bg-base-200 rounded-lg shadow"
+          >
+            {[
+              { title: 'Crescente', value: 'asc' },
+              { title: 'Decrescente', value: 'desc' },
+            ].map(({ title, value }) => (
+              <li key={value}>
+                <label>
+                  <input
+                    type="radio"
+                    name="orders"
+                    value={value}
+                    className="hidden"
+                    checked={value === orderType}
+                    onChange={(e) => setOrderType(e.target.value)}
+                  />
+                  <p>{title}</p>
+                </label>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className="dropdown">
+          <div
+            tabIndex="0"
+            role="button"
+            className="btn btn-sm focus-within:btn-active"
+          >
+            <Funnel
+              weight="fill"
+              size="20"
+              className="fill-primary pointer-events-none"
+            />
+            {
+              {
+                matriculados: 'Popularidade',
+                avaliacao: 'Avaliação',
+                criado_em: 'Data',
+              }[filterType]
+            }
+          </div>
+          <ul
+            tabIndex="0"
+            className="menu dropdown-content z-[1] bg-base-200 rounded-lg shadow"
+          >
+            {[
+              { title: 'Popularidade', value: 'matriculados' },
+              { title: 'Avaliação', value: 'avaliacao' },
+              { title: 'Data', value: 'criado_em' },
+            ].map(({ title, value }) => (
+              <li key={value}>
+                <label>
+                  <input
+                    type="radio"
+                    name="filters"
+                    value={value}
+                    className="hidden"
+                    checked={value === filterType}
+                    onChange={(e) => setFilterType(e.target.value)}
+                  />
+                  <p>{title}</p>
+                </label>
+              </li>
+            ))}
+          </ul>
+        </div>
       </nav>
       <Pagination
         index={index}
