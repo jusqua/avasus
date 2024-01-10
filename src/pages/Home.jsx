@@ -92,12 +92,17 @@ function Home() {
               ></div>
             ))
             : data.map(
-              (
-                { capa, titulo, parceiros, matriculados, duracao, avaliacao },
-                i,
-              ) => (
+              ({
+                id,
+                capa,
+                titulo,
+                parceiros,
+                matriculados,
+                duracao,
+                avaliacao,
+              }) => (
                 <div
-                  key={i}
+                  key={id}
                   className="flex flex-col md:flex-row h-30 bg-base-200 gap-4 p-4 rounded-2xl"
                 >
                   <div className="flex gap-4 flex-1 items-center">
@@ -142,7 +147,7 @@ function Home() {
                     </div>
                     <Link
                       className="self-center btn btn-sm btn-neutral rounded-full"
-                      to="/courses"
+                      to={`/courses/${id}`}
                     >
                       Ver módulo
                     </Link>
