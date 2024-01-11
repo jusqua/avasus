@@ -1,6 +1,4 @@
-import { useLocation } from 'react-router-dom';
-import { Link } from 'react-router-dom';
-import { useMatches } from 'react-router-dom';
+import { useLocation, useMatches, Link } from 'react-router-dom';
 
 function Breadcrumbs({ title, loaded = true }) {
   const location = useLocation();
@@ -14,7 +12,7 @@ function Breadcrumbs({ title, loaded = true }) {
   if (!loaded) return <div className="max-w-xs h-4 my-2 skeleton"></div>;
 
   return (
-    <div className="max-w-xs text-sm breadcrumbs my-2">
+    <div className="max-w-full text-sm breadcrumbs my-2">
       <ul>
         {crumbs.map((e, i) => (
           <li key={i}>{e}</li>
