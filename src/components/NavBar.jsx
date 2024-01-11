@@ -7,6 +7,9 @@ import routes from '@utils/routes';
 
 function NavBar({ children }) {
   const navbarDrawerRef = useRef(null);
+  const navbarRoutes = routes[0].children
+    .filter((match) => Boolean(match.handle?.title))
+    .map((match) => ({ path: match.path, title: match.handle.title }));
 
   return (
     <div className="drawer drawer-end min-h-screen">
@@ -19,10 +22,12 @@ function NavBar({ children }) {
       <div className="drawer-content flex flex-col">
         <nav className="flex justify-center shadow sticky top-0 z-10 bg-base-100">
           <header className="navbar p-4 xl:w-[1280px] gap-2">
-            <img src={LogoColour} className="sm:h-8 h-6" alt="AVASUS" />
+            <NavLink to="/">
+              <img src={LogoColour} className="sm:h-8 h-6" alt="AVASUS" />
+            </NavLink>
             <div className="flex-none hidden lg:block">
               <ul className="menu menu-horizontal">
-                {routes[0].children.map(({ path, title }, i) => (
+                {navbarRoutes.map(({ path, title }, i) => (
                   <li key={i}>
                     <NavLink className="btn btn-sm btn-ghost" to={path}>
                       {title}
@@ -88,7 +93,7 @@ function NavBar({ children }) {
             <img src={LogoColour} className="h-6 sm:hidden" alt="AVASUS" />
           </header>
           <ul className="menu">
-            {routes[0].children.map(({ path, title }, i) => (
+            {navbarRoutes.map(({ path, title }, i) => (
               <li key={i}>
                 <NavLink
                   to={path}
