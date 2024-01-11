@@ -216,16 +216,19 @@ function Courses() {
       >
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 grid-flow-row-dense gap-8 py-4">
           {data.map(
-            ({
-              id,
-              capa,
-              titulo,
-              parceiros,
-              sobre,
-              duracao,
-              matriculados,
-              avaliacao,
-            }) => (
+            (
+              {
+                id,
+                capa,
+                titulo,
+                parceiros,
+                sobre,
+                duracao,
+                matriculados,
+                avaliacao,
+              },
+              i,
+            ) => (
               <div
                 key={id}
                 className="flex flex-col min-h-30 gap-4 rounded-2xl"
@@ -273,6 +276,7 @@ function Courses() {
                 <Link
                   className="self-end link link-hover text-sm opacity-80"
                   to={`/courses/${id}`}
+                  state={data[i]}
                 >
                   Ver curso
                 </Link>
