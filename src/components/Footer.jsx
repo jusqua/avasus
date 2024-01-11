@@ -10,6 +10,10 @@ import UfrnLogo from '@assets/ufrn-logo.svg';
 import routes from '@utils/routes';
 
 function Footer() {
+  const navbarRoutes = routes[0].children
+    .filter((match) => Boolean(match.handle?.title))
+    .map((match) => ({ path: match.path, title: match.handle.title }));
+
   return (
     <footer className="flex flex-col w-full mt-16 text-white">
       <div className="bg-primary flex flex-col gap-4 sm:gap-8 p-8">
@@ -30,7 +34,7 @@ function Footer() {
           <header className="text-lg footer-title opacity-100">
             Links úteis
           </header>
-          {routes[0].children.map(({ path, title }, i) => (
+          {navbarRoutes.map(({ path, title }, i) => (
             <NavLink key={i} className="link link-hover opacity-60" to={path}>
               {title}
             </NavLink>
