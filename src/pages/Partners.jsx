@@ -16,12 +16,17 @@ function Partners() {
 
   useEffect(() => {
     instance
-      .get(`/parceiros?_start=${index}&_limit=${multiplier}`)
+      .get('/parceiros', {
+        params: {
+          _page: index + 1,
+          _limit: multiplier,
+        },
+      })
       .then((response) => {
         setPartners(response.data);
         if (!loaded) {
           setLimit(response.headers['x-total-count']);
-          setLength(Math.round(response.headers['x-total-count'] / multiplier));
+          setLength(Math.ceil(response.headers['x-total-count'] / multiplier));
           setLoaded(true);
         }
       })
