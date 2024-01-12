@@ -12,3 +12,10 @@ Dentro do diretório do projeto, execute os seguintes comandos visualizar o proj
 pnpm install
 pnpm run dev
 ```
+
+## Está lento para acessar os dados?
+
+A API está hospedada gratuitamente na plataforma [Render](https://render.com/).
+
+O serviço gratuito hiberna o servidor se este não estiver em uso constante,
+por isso o primeiro acesso pode ser lento para requisitar os dados da API.
