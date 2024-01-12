@@ -19,6 +19,37 @@ function Transparency() {
   const [data, setData] = useState({});
   const [loaded, setLoaded] = useState(false);
 
+  const generalData = [
+    [
+      'Total de usuários registrados',
+      data.dados_gerais?.incricoes_realizadas,
+      UsersFour,
+    ],
+    [
+      'Inscrições realizadas',
+      data.dados_gerais?.incricoes_realizadas,
+      FileArrowUp,
+    ],
+    ['Cursos ativos', data.dados_gerais?.cursos_ativos, GraduationCap],
+    [
+      'Direito à certificação',
+      data.dados_gerais?.direito_certificacao,
+      Certificate,
+    ],
+    [
+      'Investimento médio por curso',
+      data.dados_gerais?.investimento_medio_curso,
+      GraduationCap,
+      CurrencyDollar,
+    ],
+    [
+      'Investimento médio por aluno',
+      data.dados_gerais?.incricoes_realizadas,
+      User,
+      CurrencyDollar,
+    ],
+  ];
+
   useEffect(() => {
     instance
       .get('/transparecia')
@@ -41,41 +72,8 @@ function Transparency() {
         <div className="flex md:col-span-2 min-h-64">
           <div className="flex flex-col flex-1 justify-evenly m-6 items-center">
             <h2 className="text-2xl text-primary p-2">Dados Gerais</h2>
-            <div className="grid items-center grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 grid-flow-row-dense gap-3 flex-1 w-full">
-              {[
-                [
-                  'Total de usuários registrados',
-                  data.dados_gerais?.incricoes_realizadas,
-                  UsersFour,
-                ],
-                [
-                  'Inscrições Realizadas',
-                  data.dados_gerais?.incricoes_realizadas,
-                  FileArrowUp,
-                ],
-                [
-                  'Cursos Ativos',
-                  data.dados_gerais?.cursos_ativos,
-                  GraduationCap,
-                ],
-                [
-                  'Direito à Certificação',
-                  data.dados_gerais?.direito_certificacao,
-                  Certificate,
-                ],
-                [
-                  'Investimento médio por curso',
-                  data.dados_gerais?.investimento_medio_curso,
-                  GraduationCap,
-                  CurrencyDollar,
-                ],
-                [
-                  'Total de usuários registrados',
-                  data.dados_gerais?.incricoes_realizadas,
-                  User,
-                  CurrencyDollar,
-                ],
-              ].map((e, i) => {
+            <div className="flex flex-wrap justify-evenly gap-3 flex-1 w-full">
+              {generalData.map((e, i) => {
                 const [title, content, Icon, TopIcon] = e;
                 return (
                   <div
