@@ -90,8 +90,26 @@ function Home() {
             ? Array.from({ length: 3 }).map((_, i) => (
               <div
                 key={i}
-                className="h-30 w-full bg-base-200 rounded-2xl skeleton p-12"
-              ></div>
+                className="flex flex-col md:flex-row h-30 bg-base-200 gap-4 p-4 rounded-2xl"
+              >
+                <div className="flex gap-4 flex-1 items-center">
+                  <div className="h-20 w-20 rounded-2xl skeleton"></div>
+                  <div className="flex flex-col flex-1 gap-2">
+                    <div className="h-6 skeleton"></div>
+                    <div className="h-4 w-2/3 skeleton"></div>
+                  </div>
+                </div>
+                <div className="flex flex-col sm:flex-row gap-4 self-center">
+                  <div className="flex flex-col md:flex-row gap-2 sm:gap-4 items-center">
+                    <div className="flex gap-4">
+                      <div className="skeleton h-4 w-24"></div>
+                      <div className="skeleton h-4 w-24"></div>
+                    </div>
+                    <div className="skeleton h-4 w-32"></div>
+                  </div>
+                  <div className="skeleton h-8 w-32 self-center"></div>
+                </div>
+              </div>
             ))
             : data.map(
               (
