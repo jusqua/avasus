@@ -274,7 +274,13 @@ function Courses() {
                     />
                   </div>
                   <div className="flex flex-col flex-1 gap-1">
-                    <h2 className="text-md">{titulo}</h2>
+                    <Link
+                      to={`/courses/${id}`}
+                      state={data[i]}
+                      className="text-md"
+                    >
+                      {titulo}
+                    </Link>
                     <h3 className="text-sm text-primary">{parceiros}</h3>
                   </div>
                   <div className="flex justify-between">

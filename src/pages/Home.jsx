@@ -94,15 +94,18 @@ function Home() {
               ></div>
             ))
             : data.map(
-              ({
-                id,
-                capa,
-                titulo,
-                parceiros,
-                matriculados,
-                duracao,
-                avaliacao,
-              }) => (
+              (
+                {
+                  id,
+                  capa,
+                  titulo,
+                  parceiros,
+                  matriculados,
+                  duracao,
+                  avaliacao,
+                },
+                i,
+              ) => (
                 <div
                   key={id}
                   className="flex flex-col md:flex-row h-30 bg-base-200 gap-4 p-4 rounded-2xl"
@@ -118,6 +121,7 @@ function Home() {
                     <div className="flex flex-col flex-1 justify-evenly w-32">
                       <Link
                         to={`/courses/${id}`}
+                        state={data[i]}
                         className="text-md lg:text-xl link link-hover"
                       >
                         {titulo}
@@ -155,6 +159,7 @@ function Home() {
                     <Link
                       className="self-center btn btn-sm btn-neutral rounded-full"
                       to={`/courses/${id}`}
+                      state={data[i]}
                     >
                       Ver módulo
                     </Link>
