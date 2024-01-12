@@ -93,6 +93,16 @@ function NavBar({ children }) {
             <img src={LogoColour} className="h-6 sm:hidden" alt="AVASUS" />
           </header>
           <ul className="menu">
+            <li>
+              <NavLink
+                to="/"
+                onClick={() => {
+                  navbarDrawerRef.current.checked = false;
+                }}
+              >
+                Início
+              </NavLink>
+            </li>
             {navbarRoutes.map(({ path, title }, i) => (
               <li key={i}>
                 <NavLink
