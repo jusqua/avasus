@@ -19,7 +19,9 @@ function Home() {
 
   useEffect(() => {
     instance
-      .get(`/cursos?_sort=${sortBy}&_order=desc&_start=0&_limit=3`)
+      .get('/cursos', {
+        params: { _sort: sortBy, _order: 'desc', _page: 1, _limit: 3 },
+      })
       .then((response) => setData(response.data))
       .catch(() => { });
   }, [data, sortBy]);
@@ -85,7 +87,7 @@ function Home() {
             </label>
           </nav>
           {data.length === 0
-            ? [...Array(3).keys()].map((_, i) => (
+            ? Array.from({ length: 3 }).map((_, i) => (
               <div
                 key={i}
                 className="h-30 w-full bg-base-200 rounded-2xl skeleton p-12"
@@ -114,7 +116,12 @@ function Home() {
                       />
                     </div>
                     <div className="flex flex-col flex-1 justify-evenly w-32">
-                      <h2 className="text-md lg:text-xl">{titulo}</h2>
+                      <Link
+                        to={`/courses/${id}`}
+                        className="text-md lg:text-xl link link-hover"
+                      >
+                        {titulo}
+                      </Link>
                       <h3 className="text-sm lg:text-md text-primary">
                         {parceiros}
                       </h3>
