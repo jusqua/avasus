@@ -86,14 +86,18 @@ function Courses() {
           <div
             tabIndex="0"
             role="button"
-            className="btn btn-sm focus-within:btn-active"
+            className="btn btn-sm focus-within:btn-active overflow-hidden"
           >
             <GridFour
               weight="fill"
               size="20"
               className="fill-primary pointer-events-none"
             />
-            {categorieType}
+            <span className="flex items-center relative min-w-12 h-full">
+              {categorieType || (
+                <div className="absolute inset-0 w-24 skeleton rounded-none"></div>
+              )}
+            </span>
           </div>
           <ul
             tabIndex="0"
@@ -215,74 +219,100 @@ function Courses() {
         loaded={loaded}
       >
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 grid-flow-row-dense gap-8 py-4">
-          {data.map(
-            (
-              {
-                id,
-                capa,
-                titulo,
-                parceiros,
-                sobre,
-                duracao,
-                matriculados,
-                avaliacao,
-              },
-              i,
-            ) => (
-              <div
-                key={id}
-                className="flex flex-col min-h-30 gap-4 rounded-2xl"
-              >
-                <div className="h-32 w-full rounded-2xl skeleton overflow-hidden">
-                  <img
-                    src={capa}
-                    key={capa}
-                    className="object-fill w-full h-full"
-                  />
-                </div>
-                <div className="flex flex-col flex-1 gap-1">
-                  <h2 className="text-md">{titulo}</h2>
-                  <h3 className="text-sm text-primary">{parceiros}</h3>
+          {!loaded
+            ? Array.from({ length: multiplier }).map((_, i) => (
+              <div key={i} className="flex flex-col min-h-30 gap-4">
+                <div className="h-32 w-full rounded-2xl skeleton overflow-hidden"></div>
+                <div className="flex flex-col gap-1">
+                  <div className="h-6 w-48 skeleton"></div>
+                  <div className="h-5 w-32 skeleton"></div>
                 </div>
                 <div className="flex justify-between">
                   <div className="flex gap-2">
-                    <div className="flex items-center justify-center gap-1">
-                      <Users
-                        size="16"
-                        weight="fill"
-                        className="fill-primary stroke-primary"
-                      />
-                      <span className="text-sm">
-                        {matriculados.toLocaleString('pt-BR')}
-                      </span>
-                    </div>
-                    <div className="flex items-center justify-center gap-1">
-                      <Clock
-                        size="16"
-                        weight="fill"
-                        className="fill-primary stroke-primary"
-                      />
-                      <span className="text-sm">{duracao.trim()}</span>
-                    </div>
+                    <div className="flex items-center w-16 h-4 justify-center gap-1 skeleton"></div>
+                    <div className="flex items-center w-16 h-4 justify-center gap-1 skeleton"></div>
                   </div>
-                  <div className="flex items-center justify-center gap-1">
-                    <Rating rating={Number.parseFloat(avaliacao)} size="16" />
-                    <span className="text-sm">{avaliacao}</span>
-                  </div>
+                  <div className="flex items-center w-32 h-4 justify-center gap-1 skeleton"></div>
                 </div>
-                <p className="text-sm text-ellipsis overflow-hidden line-clamp-3 opacity-90">
-                  {sobre}
-                </p>
-                <Link
-                  className="self-end link link-hover text-sm opacity-80"
-                  to={`/courses/${id}`}
-                  state={data[i]}
-                >
-                  Ver curso
-                </Link>
+                <div className="flex flex-col w-full gap-1">
+                  <div className="skeleton h-4 w-full"></div>
+                  <div className="skeleton h-4 w-full"></div>
+                  <div className="skeleton h-4 w-24"></div>
+                </div>
+                <div className="self-end skeleton h-4 w-16"></div>
               </div>
-            ),
-          )}
+            ))
+            : data.map(
+              (
+                {
+                  id,
+                  capa,
+                  titulo,
+                  parceiros,
+                  sobre,
+                  duracao,
+                  matriculados,
+                  avaliacao,
+                },
+                i,
+              ) => (
+                <div
+                  key={id}
+                  className="flex flex-col min-h-30 gap-4 rounded-2xl"
+                >
+                  <div className="h-32 w-full rounded-2xl skeleton overflow-hidden">
+                    <img
+                      src={capa}
+                      key={capa}
+                      className="object-fill w-full h-full"
+                    />
+                  </div>
+                  <div className="flex flex-col flex-1 gap-1">
+                    <h2 className="text-md">{titulo}</h2>
+                    <h3 className="text-sm text-primary">{parceiros}</h3>
+                  </div>
+                  <div className="flex justify-between">
+                    <div className="flex gap-2">
+                      <div className="flex items-center justify-center gap-1">
+                        <Users
+                          size="16"
+                          weight="fill"
+                          className="fill-primary stroke-primary"
+                        />
+                        <span className="text-sm">
+                          {matriculados.toLocaleString('pt-BR')}
+                        </span>
+                      </div>
+                      <div className="flex items-center justify-center gap-1">
+                        <Clock
+                          size="16"
+                          weight="fill"
+                          className="fill-primary stroke-primary"
+                        />
+                        <span className="text-sm">{duracao.trim()}</span>
+                      </div>
+                    </div>
+                    <div className="flex items-center justify-center gap-1">
+                      <Rating
+                        rating={Number.parseFloat(avaliacao)}
+                        size="16"
+                      />
+                      <span className="text-sm">{avaliacao}</span>
+                    </div>
+                  </div>
+                  <p className="text-sm text-ellipsis overflow-hidden line-clamp-3 opacity-90">
+                    {sobre}
+                  </p>
+                  <Link
+                    className="self-end link link-hover text-sm opacity-80"
+                    to={`/courses/${id}`}
+                    state={data[i]}
+                  >
+                    Ver curso
+                  </Link>
+                </div>
+              ),
+            )}
         </div>
       </Pagination>
     </Main>
