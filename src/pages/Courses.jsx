@@ -277,7 +277,7 @@ function Courses() {
                     <Link
                       to={`/courses/${id}`}
                       state={data[i]}
-                      className="text-md"
+                      className="text-md link link-hover"
                     >
                       {titulo}
                     </Link>
