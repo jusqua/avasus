@@ -12,7 +12,7 @@ function Breadcrumbs({ title, loaded = true }) {
   if (!loaded) return <div className="max-w-xs h-4 my-2 skeleton"></div>;
 
   return (
-    <div className="max-w-full text-sm breadcrumbs my-2">
+    <div className="max-w-full text-sm breadcrumbs my-2 scrollbar-none">
       <ul>
         {crumbs.map((e, i) => (
           <li key={i}>{e}</li>
