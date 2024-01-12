@@ -16,11 +16,12 @@ import Rating from '@components/Rating';
 import instance from '@utils/api';
 
 function Courses() {
-  const [categorieType, setCategorieType] = useState('');
+  const [allCategoriesLabel] = useState('Todas');
+  const [categorieType, setCategorieType] = useState(allCategoriesLabel);
   const [orderType, setOrderType] = useState('desc');
   const [filterType, setFilterType] = useState('matriculados');
 
-  const [categories, setCategories] = useState([]);
+  const [categories, setCategories] = useState([allCategoriesLabel]);
   const [data, setData] = useState([]);
   const [loaded, setLoaded] = useState(false);
   const [limit, setLimit] = useState(0);
@@ -39,11 +40,13 @@ function Courses() {
   }
 
   useEffect(() => {
-    if (categories.length !== 0) {
+    if (categories.length > 1) {
       instance
         .get('/cursos', {
           params: {
-            cateroria: categorieType,
+            ...(categorieType !== allCategoriesLabel && {
+              cateroria: categorieType,
+            }),
             _sort: filterType,
             _order: orderType,
             _page: index + 1,
@@ -65,8 +68,8 @@ function Courses() {
             ...new Set(response.data.map(({ cateroria }) => cateroria)),
           ];
           possibleCategories.sort();
+          possibleCategories.unshift(allCategoriesLabel);
           setCategories(possibleCategories);
-          setCategorieType(possibleCategories[0]);
         })
         .catch(() => { });
     }
@@ -79,6 +82,7 @@ function Courses() {
     categorieType,
     orderType,
     filterType,
+    allCategoriesLabel,
   ]);
 
   return (
@@ -99,11 +103,7 @@ function Courses() {
               size="20"
               className="fill-primary pointer-events-none"
             />
-            <span className="flex items-center relative min-w-12 h-full">
-              {categorieType || (
-                <div className="absolute inset-0 w-24 skeleton rounded-none"></div>
-              )}
-            </span>
+            {categorieType}
           </div>
           <ul
             tabIndex="0"
