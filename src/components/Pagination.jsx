@@ -110,23 +110,27 @@ function Pagination({
     );
   }
 
+  if (!loaded)
+    return (
+      <div className="flex flex-col gap-1">
+        <div className="skeleton h-4 w-64"></div>
+        <div className="self-center md:hidden skeleton w-72 h-8"></div>
+        <div className="flex-grow-1">{children}</div>
+        <div className="self-center skeleton w-72 h-8"></div>
+      </div>
+    );
+
   return (
     <div className="flex flex-col">
-      <p className="text-gray-500 italic font-normal">
-        {!loaded ? (
-          <span className="skeleton h-6 w-48"></span>
-        ) : (
-          `${Math.min((index + 1) * multiplier, limit)} de ${limit} resultados`
-        )}
-      </p>
+      <i className="text-gray-500 font-normal">
+        {Math.min((index + 1) * multiplier, limit)} de {limit} resultados
+      </i>
       <div className="self-center md:hidden">
-        {loaded ? null : <div className="skeleton h-8 w-70"></div>}
-        {!loaded || length < 1 ? null : <PaginationItem />}
+        <PaginationItem />
       </div>
       <div className="flex-grow-1">{children}</div>
       <div className="self-center">
-        {loaded ? null : <div className="skeleton h-8 w-70"></div>}
-        {!loaded || length < 1 ? null : <PaginationItem />}
+        <PaginationItem />
       </div>
     </div>
   );
