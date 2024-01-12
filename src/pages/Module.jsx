@@ -11,17 +11,89 @@ function Module() {
   const { id } = useParams();
   const { state } = useLocation();
   const [data, setData] = useState(state || {});
+  const [loaded, setLoaded] = useState(Boolean(state));
 
   useEffect(() => {
     if (state === null) {
       instance
         .get(`/cursos/${id}`)
-        .then((response) => setData(response.data))
+        .then((response) => {
+          setData(response.data);
+          setLoaded(true);
+        })
         .catch(() => { });
     }
   }, [data, state, id]);
 
-  if (!Object.keys(data).length) return null;
+  if (!loaded)
+    return (
+      <div className="flex flex-1 flex-col w-full items-center">
+        <div className="flex w-full flex-1 justify-center min-h-64 bg-base-content">
+          <div className="w-full lg:w-[1024px] p-4 flex flex-col justify-between z-[1]">
+            <div className="h-4 w-96 skeleton"></div>
+            <div className="h-8 w-full skeleton"></div>
+            <div className="h-6 w-64 skeleton"></div>
+          </div>
+        </div>
+        <Main>
+          <h2 className="text-center text-3xl text-primary">
+            Informações Gerais do Curso
+          </h2>
+          <div className="flex flex-wrap my-6 gap-2 justify-evenly text-xl">
+            <div></div>
+          </div>
+          <h3 className="text-center text-xl text-primary my-4">
+            Sobre o curso
+          </h3>
+          <div className="flex flex-col gap-1">
+            {Array.from({ length: 6 }).map((_, i) => (
+              <div key={i} className="skeleton h-4 w-full"></div>
+            ))}
+            <div className="skeleton h-4 w-1/3"></div>
+          </div>
+          <h3 className="text-center text-xl text-primary my-4">Objetivos</h3>
+          <h4 className="text-lg text-black mb-2">Objetivos Gerais</h4>
+          <div className="flex flex-col gap-1">
+            {Array.from({ length: 2 }).map((_, i) => (
+              <div key={i} className="skeleton h-4 w-full"></div>
+            ))}
+            <div className="skeleton h-4 w-1/2"></div>
+          </div>
+          <h4 className="text-lg text-black mb-2">Objetivos Específicos</h4>
+          <div className="flex flex-col gap-1">
+            {Array.from({ length: 2 }).map((_, i) => (
+              <div key={i} className="skeleton h-4 w-full"></div>
+            ))}
+            <div className="skeleton h-4 w-1/2"></div>
+          </div>
+          <h3 className="text-center text-xl text-primary my-4">Conteúdo</h3>
+          <ul className="list-disc flex flex-col gap-1 pl-4">
+            <li>
+              <div className="skeleton h-4 w-2/3"></div>
+            </li>
+            <li>
+              <div className="skeleton h-4 w-full"></div>
+            </li>
+            <li>
+              <div className="skeleton h-4 w-1/2"></div>
+            </li>
+          </ul>
+          <h3 className="text-center text-xl text-primary my-4">
+            Recursos educacionais
+          </h3>
+          <p className="text-center">
+            Serão utilizados textos no formato de PDF, vídeos, ilustrações,
+            infográficos, dentre outros recursos.
+          </p>
+          <h3 className="text-center text-xl text-primary my-4">Créditos</h3>
+          <div className="flex flex-wrap justify-evenly items-center">
+            {Array.from({ length: 3 }).map((_, i) => (
+              <div key={i} className="h-32 w-56 skeleton"></div>
+            ))}
+          </div>
+        </Main>
+      </div>
+    );
 
   return (
     <div className="flex flex-1 flex-col w-full items-center">
