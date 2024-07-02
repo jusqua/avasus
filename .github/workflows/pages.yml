@@ -32,11 +32,8 @@ jobs:
       - name: Build project
         run: pnpm run build
 
-      - name: Move build output to public directory
-        run: mv dist public
-
       - name: Deploy
-        uses: peaceiris/actions-gh-pages@v4
+        uses: actions/deploy-pages@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./public
+          artifact_name: dist
+                
